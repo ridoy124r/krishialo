@@ -7,5 +7,5 @@
   }
 }
 .animate-grow {
-  animation: growWidth 1.8s ease-out forwards;
+  animation: growWidth 2s ease-out forwards;
 }
