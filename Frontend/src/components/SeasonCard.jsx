@@ -21,7 +21,7 @@ const SeasonCard = () => {
   const data = content[lang];
 
   return (
-    <div className="max-w-xl mx-auto bg-white shadow-xl rounded-3xl overflow-hidden border border-green-200">
+    <div className="max-w-7xl mx-auto bg-white shadow-xl rounded-3xl overflow-hidden border border-green-200">
       
       <div className="h-56 w-full overflow-hidden">
         <img

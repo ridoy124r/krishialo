@@ -10,17 +10,16 @@ export default function FarmHero() {
       </div>
 
       {/* Content Container */}
-      <div className="relative z-20 min-h-screen  flex items-center">
-        <div className="w-full px-6 sm:px-8 md:px-12 lg:px-20 xl:px-24 py-20">
+      <div className="relative z-20 min-h-screen flex items-center">
+        <div className="w-full max-w-[1440px] mx-auto px-6 sm:px-8 md:px-12 lg:px-20 xl:px-24 py-20">
           <div className="max-w-2xl">
             <h1 className="text-white font-bold mb-6 sm:mb-8">
               <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-snug sm:leading-snug md:leading-tight lg:leading-tight">
-                Digitize Your Farm.
+                <span className="text-[#D9F2E2]">Digitize</span> Your Farm.
               </span>
               <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-snug sm:leading-snug md:leading-tight lg:leading-tight">
-                Revolutionize Your Harvest.
+                Revolutionize <span className="text-[#D9F2E2]">Your Harvest.</span>
               </span>
-             
             </h1>
 
             {/* Description */}
@@ -31,7 +30,7 @@ export default function FarmHero() {
 
             <div className="flex flex-col sm:flex-row sm:space-x-4 md:space-x-6 lg:space-x-8 space-y-4 sm:space-y-0">
               <button
-                className="bg-red-600 hover:bg-red-700 active:bg-red-800  text-white font-bold text-sm sm:text-base md:text-md lg:text-md rounded-md
+                className="bg-red-600 hover:bg-red-700 active:bg-red-800 text-white font-bold text-sm sm:text-base md:text-md lg:text-md rounded-md
          px-4 sm:px-6 md:px-8 lg:px-10 2xl:px-12 py-3 sm:py-3 md:py-4 lg:py-5 2xl:py-6 uppercase tracking-wide transition-all duration-300 transform hover:scale-105"
               >
                 BOOK A SERVICE

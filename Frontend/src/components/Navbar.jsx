@@ -23,10 +23,9 @@ function Navbar() {
           : 'bg-white/20 backdrop-blur-sm'}
       `}
     >
-      <div className="mx-auto py-4 px-6 lg:px-[120px]">
+      <div className="w-full max-w-[1440px] mx-auto py-4 px-6 lg:px-[120px]">
         <div className="flex items-center justify-between">
-
-        
+          {/* Logo */}
           <div className="flex items-center">
             <img
               src="public/images/logo.png"
@@ -43,7 +42,9 @@ function Navbar() {
                 href={`#${item.toLowerCase().replace(/\s+/g, '')}`}
                 className={`
                   pb-1
-                  ${item === 'Home' ? 'text-green-700 border-b-2 border-green-700 font-medium' : 'text-white  border-b-2 border-transparent hover:border-green-700 hover:text-green-700'}
+                  ${item === 'Home'
+                    ? 'text-green-700 border-b-2 border-green-700 font-medium'
+                    : 'text-white border-b-2 border-transparent hover:border-green-700 hover:text-green-700'}
                   transition-colors duration-300
                 `}
               >

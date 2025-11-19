@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+
+@keyframes growWidth {
+  from {
+    width: 0%;
+  }
+}
+.animate-grow {
+  animation: growWidth 1.8s ease-out forwards;
+}
