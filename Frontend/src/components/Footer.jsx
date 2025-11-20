@@ -3,10 +3,10 @@ import { MapPin, Phone, Mail } from 'lucide-react';
 
 export default function KrishiAloFooter() {
   return (
-    <div className="w-full relative bg-[#002201] pt-24 mt-40">
+    <div className="w-full relative bg-[#002201] pt-24 mt-65">
       {/* CTA Section  */}
 
-      <div className="relative z-10 mx-auto max-w-[1200px] px-4 -mt-36 md:-mt-40 lg:-mt-48">
+      <div className="relative z-10 mx-auto max-w-[1200px] px-4 -mt-36 md:-mt-40 lg:-mt-80">
         <div className="bg-green-600 rounded-3xl p-6 sm:p-10 lg:p-16 text-center shadow-2xl">
           <h2 className="text-2xl text-white md:text-4xl font-bold mb-4">
             Let's book a Service!
@@ -193,7 +193,7 @@ export default function KrishiAloFooter() {
       </div>
 
       {/* Copyright Section */}
-      <div className="pt-6 pb-6 text-center bg-black">
+      <div className="pt-3 pb-3 text-center bg-black">
         <p className="text-gray-400 text-sm">
           © 2025 KrishiAlo Bangladesh. All rights reserved.
         </p>
