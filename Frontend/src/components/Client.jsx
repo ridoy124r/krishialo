@@ -58,7 +58,7 @@ const StatsSection = () => {
         <div className="md:col-span-1 lg:col-span-2">
           
        
-          <div className="grid grid-cols-2  sm:grid-cols-3 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2  md:grid-cols-1 lg:grid-cols-3 gap-4">
             
             {/* Box 1 (Happy Clients) -  */}
             <div className="  bg-white border-2 border-green-900 rounded-lg p-4 text-center w-full shadow-md">
@@ -78,13 +78,13 @@ const StatsSection = () => {
                   />
                 </svg>
               </div>
-              <h3 className="md:text-xl text-green-900 font-black text-2xl ">368</h3>
-              <p className="text-green-900 text-sm mt-1">Happy Clients</p>
+              <h3 className="md:text-md text-green-900 font-black text-2xl  ">368</h3>
+              <p className=" text-green-900 text-sm mt-1">Happy Clients</p>
             </div>
 
             {/*  (Projects Completed)  */}
-            <div className="bg-white border-2 border-green-900 rounded-lg p-4 text-center w-full shadow-md">
-              <div className="text-green-900 mb-2">
+            <div className="  bg-white border-2 border-green-900 rounded-lg p-4 text-center w-full shadow-md">
+              <div className="md:text-md text-green-900 mb-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="mx-auto w-7 h-7" 
