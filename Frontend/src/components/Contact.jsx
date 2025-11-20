@@ -22,7 +22,7 @@ export default function AgriTechContact() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4 md:p-8">
+    <div className="min-h-screen flex items-center justify-center p-4 md:p-8">
       <div className="w-full max-w-[1440px]">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Left Section */}
