@@ -54,7 +54,6 @@ const RightWaithersec = () => {
       );
 
       if (!resForecast.ok) {
-        // still process current but show notice
         const forecast = null;
         processWeather(current, forecast);
         setError("Forecast not available for this location.");
@@ -74,8 +73,6 @@ const RightWaithersec = () => {
 
   const processWeather = (current, forecast) => {
     const today = new Date();
-
-    // hourly — if forecast exists use it, otherwise approximate with current
     const hourlySource = forecast?.list ?? [];
     const hourly = (hourlySource.length
       ? hourlySource.slice(0, 8)
@@ -85,7 +82,6 @@ const RightWaithersec = () => {
       temp: Math.round(item.main.temp),
     }));
 
-    // daily 5-day from forecast if available
     const daily = [];
     for (let i = 1; i <= 5; i++) {
       const date = new Date(today);
@@ -116,7 +112,7 @@ const RightWaithersec = () => {
         temp: Math.round(current.main.temp),
         description: current.weather[0].main,
         humidity: current.main.humidity,
-        windSpeed: Math.round(current.wind.speed * 2.237), // m/s to mph
+        windSpeed: Math.round(current.wind.speed * 2.237),
         rainPossibility: current.clouds?.all ?? 0,
         icon: current.weather[0].description,
       },
@@ -158,7 +154,6 @@ const RightWaithersec = () => {
 
   useEffect(() => {
     if (location) fetchWeather(location);
-   
   }, [location]);
 
   const handleSearch = () => {
@@ -195,10 +190,11 @@ const RightWaithersec = () => {
         flex 
         flex-col 
         lg:flex-row 
-        gap-6 lg:gap-10
+        gap-6 
+        lg:gap-4     /* Laptop (1024px) small gap */
+        xl:gap-10    /* Big screens */
       "
     >
-      {/* show non-blocking error */}
       {error && (
         <div className="w-full bg-yellow-50 border-l-4 border-yellow-400 p-3 rounded mb-2 text-sm text-yellow-800">
           {error}
@@ -274,15 +270,17 @@ const RightWaithersec = () => {
         </div>
       </div>
 
-      {/* RIGHT FORECAST PANEL */}
+      {/* RIGHT PANEL */}
       <div
         className="
           w-full 
-          lg:w-[35%]
+          lg:w-[40%]       /* Laptop balanced width */
+          xl:w-[35%]       /* Big screens */
           pt-6 lg:pt-0 
           border-t lg:border-t-0 
           lg:border-l 
-          pl-0 lg:pl-6 
+          pl-0 lg:pl-4    /* Laptop small padding */
+          xl:pl-6         /* Large screens padding */
           space-y-4
         "
       >

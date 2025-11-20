@@ -23,15 +23,15 @@ export default function CollaborationSlider() {
         {/* Slider Container */}
         <div className="relative overflow-hidden">
           {/* Gradient Overlays */}
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10"></div>
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10"></div>
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-linear-to-r from-white to-transparent z-10"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-linear-to-l from-white to-transparent z-10"></div>
 
           {/* Sliding Content */}
           <div className="flex animate-scroll">
             {duplicatedPartners.map((partner, index) => (
               <div
                 key={`${partner.id}-${index}`}
-                className="flex-shrink-0 flex items-center justify-center px-12 md:px-16"
+                className="shrink-0 flex items-center justify-center px-12 md:px-16"
                 style={{ width: '300px' }}
               >
                 <img
