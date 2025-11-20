@@ -1,5 +1,5 @@
 import React from 'react'
-import RightWaithersec from './rightWaithersec'
+import RightWaithersec from './RightWaithersec'
 import SeasonCard from './SeasonCard'
 import BusinessGrowthDashboard from './Growth'
 

@@ -43,7 +43,7 @@ const SeasonCard = () => {
           <div className="flex gap-2">
             <button
               onClick={() => setLang('eng')}
-              className={`px-4 py-1 rounded-lg text-sm font-semibold border ${
+              className={`px-4 py-1 rounded-lg text-md font-semibold border ${
                 lang === 'eng'
                   ? 'bg-green-700 text-white border-green-800'
                   : 'bg-white text-green-800 border-green-400'
