@@ -7,13 +7,13 @@ const StatsSection = () => {
       style={{
         backgroundImage: "url('/images/cl bg.png')",
         backgroundSize: "auto",
-        backgroundBlendMode: "overlay", // Optional: Helps make the text readable
+        backgroundBlendMode: "overlay", 
       }}
     >
       <div className="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6 items-center">
         
         {/* 1. Left Box (Client Info) */}
-        {/* Occupies 1 column on MD, 2 columns on LG */}
+      
         <div className="md:col-span-1 lg:col-span-2 bg-white border-2 border-green-900 rounded-lg flex flex-col items-center justify-center gap-2 px-4 py-4 md:py-6 text-center shadow-lg">
           <div className="flex -space-x-3 mb-2 justify-center">
             {/* Avatars */}
@@ -42,8 +42,8 @@ const StatsSection = () => {
           </h2>
         </div>
 
-        {/* 2. Center Circle (Logo/KA BG) */}
-        {/* Occupies 1 column on MD, 2 columns on LG */}
+    
+     
         <div className="md:col-span-1 lg:col-span-2 flex justify-center">
           <div className="w-40 h-40 md:w-48 md:h-48 lg:w-52 lg:h-52 rounded-full border-4 border-white flex items-center justify-center bg-white shadow-xl">
             <img
@@ -54,20 +54,18 @@ const StatsSection = () => {
           </div>
         </div>
 
-        {/* 3. Right 3 Boxes (Stats) */}
-        {/* Occupies 1 column on MD, 2 columns on LG */}
-        {/* Changed default (mobile) behavior to a 2-column grid and added md:col-span-1 for clarity */}
+      
         <div className="md:col-span-1 lg:col-span-2">
           
-          {/* Mobile/Small Screens: 2 Columns. Medium/Large Screens: 3 Columns. */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-4">
+       
+          <div className="grid grid-cols-2  sm:grid-cols-3 lg:grid-cols-3 gap-4">
             
-            {/* Box 1 (Happy Clients) - Use w-full and p-4 consistently */}
-            <div className="bg-white border-2 border-green-900 rounded-lg p-4 text-center w-full shadow-md">
+            {/* Box 1 (Happy Clients) -  */}
+            <div className="  bg-white border-2 border-green-900 rounded-lg p-4 text-center w-full shadow-md">
               <div className="text-green-900 mb-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="mx-auto w-7 h-7" // Set size using utility classes
+                  className="mx-auto w-7 h-7" 
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -80,16 +78,16 @@ const StatsSection = () => {
                   />
                 </svg>
               </div>
-              <h3 className="text-green-900 font-black text-2xl">368</h3>
+              <h3 className="md:text-xl text-green-900 font-black text-2xl ">368</h3>
               <p className="text-green-900 text-sm mt-1">Happy Clients</p>
             </div>
 
-            {/* Box 2 (Projects Completed) - Use w-full and p-4 consistently */}
+            {/*  (Projects Completed)  */}
             <div className="bg-white border-2 border-green-900 rounded-lg p-4 text-center w-full shadow-md">
               <div className="text-green-900 mb-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="mx-auto w-7 h-7" // Set size using utility classes
+                  className="mx-auto w-7 h-7" 
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -106,14 +104,13 @@ const StatsSection = () => {
               <p className="text-green-900 text-sm mt-1">Projects Completed</p>
             </div>
 
-            {/* Box 3 (IoT Products Sold) - Use w-full and p-4 consistently */}
-            {/* Added a break point (sm:col-span-1) to ensure proper flow across different screen sizes */}
+            {/* Box 3 (IoT Products Sold) */}
+         
             <div className="bg-white border-2 border-green-900 rounded-lg p-4 text-center w-full col-span-2 lg:col-span-1 md:col-span-1 sm:col-span-1 shadow-md">
               <div className="text-green-900 mb-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="mx-auto w-7 h-7" // Set size using utility classes
-                  fill="none"
+                  className="mx-auto w-7 h-7" 
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                   strokeWidth={2}
