@@ -6,9 +6,12 @@ const RightWaithersec = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [inputValue, setInputValue] = useState("");
+  const [error, setError] = useState(null);
+
+  const API_KEY = import.meta.env.VITE_WEATHER_API_KEY || "";
 
   const getWeatherIcon = (description, size = 64) => {
-    const desc = description?.toLowerCase() || "";
+    const desc = (description || "").toLowerCase();
     if (desc.includes("clear") || desc.includes("sunny")) {
       return <Sun size={size} className="text-yellow-400" />;
     } else if (desc.includes("rain")) {
@@ -20,25 +23,48 @@ const RightWaithersec = () => {
   };
 
   const fetchWeather = async (city) => {
+    if (!API_KEY) {
+      console.warn("VITE_WEATHER_API_KEY is missing. Using demo data.");
+      setError("Weather API key not found — showing demo data.");
+      setDemoData();
+      setLoading(false);
+      return;
+    }
+
     try {
       setLoading(true);
-      const API_KEY = "a0025db8f29f3c7f498b58f80e9b9881";
+      setError(null);
 
       const resCurrent = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`
+        `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
+          city
+        )}&units=metric&appid=${API_KEY}`
       );
 
-      if (!resCurrent.ok) throw new Error("Location not found");
+      if (!resCurrent.ok) {
+        throw new Error("Location not found");
+      }
 
       const current = await resCurrent.json();
-      const resForecast = await fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${API_KEY}`
-      );
-      const forecast = await resForecast.json();
 
+      const resForecast = await fetch(
+        `https://api.openweathermap.org/data/2.5/forecast?q=${encodeURIComponent(
+          city
+        )}&units=metric&appid=${API_KEY}`
+      );
+
+      if (!resForecast.ok) {
+        const forecast = null;
+        processWeather(current, forecast);
+        setError("Forecast not available for this location.");
+        return;
+      }
+
+      const forecast = await resForecast.json();
       processWeather(current, forecast);
     } catch (err) {
-      console.log(err);
+      console.error("Weather fetch error:", err);
+      setError(String(err.message || err));
       setDemoData();
     } finally {
       setLoading(false);
@@ -47,8 +73,11 @@ const RightWaithersec = () => {
 
   const processWeather = (current, forecast) => {
     const today = new Date();
-
-    const hourly = forecast.list.slice(0, 8).map((item) => ({
+    const hourlySource = forecast?.list ?? [];
+    const hourly = (hourlySource.length
+      ? hourlySource.slice(0, 8)
+      : [current]
+    ).map((item) => ({
       time: new Date(item.dt * 1000).getHours(),
       temp: Math.round(item.main.temp),
     }));
@@ -58,10 +87,13 @@ const RightWaithersec = () => {
       const date = new Date(today);
       date.setDate(date.getDate() + i);
 
-      const match = forecast.list.find((item) => {
-        const d = new Date(item.dt * 1000);
-        return d.getDate() === date.getDate();
-      });
+      let match = null;
+      if (forecast?.list) {
+        match = forecast.list.find((item) => {
+          const d = new Date(item.dt * 1000);
+          return d.getDate() === date.getDate();
+        });
+      }
 
       daily.push({
         day: date.toLocaleDateString("en-US", { weekday: "long" }),
@@ -70,8 +102,8 @@ const RightWaithersec = () => {
           day: "2-digit",
           year: "numeric",
         }),
-        temp: match ? Math.round(match.main.temp) : Math.round(current.main.temp - i),
-        description: match?.weather[0]?.description || current.weather[0].description,
+        temp: match ? Math.round(match.main.temp) : Math.round(current.main.temp),
+        description: match?.weather?.[0]?.description || current.weather[0].description,
       });
     }
 
@@ -81,7 +113,7 @@ const RightWaithersec = () => {
         description: current.weather[0].main,
         humidity: current.main.humidity,
         windSpeed: Math.round(current.wind.speed * 2.237),
-        rainPossibility: current.clouds.all,
+        rainPossibility: current.clouds?.all ?? 0,
         icon: current.weather[0].description,
       },
       hourly,
@@ -153,14 +185,21 @@ const RightWaithersec = () => {
         shadow-xl 
         p-4 sm:p-6 
         w-full 
-        max-w-[1150px]       /* FIX for laptop responsiveness */
+        max-w-[1150px]
         mx-auto 
         flex 
         flex-col 
         lg:flex-row 
-        gap-6 lg:gap-10
+        gap-6 
+        lg:gap-4     /* Laptop (1024px) small gap */
+        xl:gap-10    /* Big screens */
       "
     >
+      {error && (
+        <div className="w-full bg-yellow-50 border-l-4 border-yellow-400 p-3 rounded mb-2 text-sm text-yellow-800">
+          {error}
+        </div>
+      )}
 
       {/* LEFT PANEL */}
       <div className="flex-1">
@@ -231,15 +270,17 @@ const RightWaithersec = () => {
         </div>
       </div>
 
-      {/* RIGHT FORECAST PANEL */}
+      {/* RIGHT PANEL */}
       <div
         className="
           w-full 
-          lg:w-[35%]            /* FIXED width for laptop */
+          lg:w-[40%]       /* Laptop balanced width */
+          xl:w-[35%]       /* Big screens */
           pt-6 lg:pt-0 
           border-t lg:border-t-0 
           lg:border-l 
-          pl-0 lg:pl-6 
+          pl-0 lg:pl-4    /* Laptop small padding */
+          xl:pl-6         /* Large screens padding */
           space-y-4
         "
       >
