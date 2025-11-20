@@ -3,14 +3,14 @@ import React from "react";
 const StatsSection = () => {
   return (
     <section
-      className="bg-green-700 bg-repeat px-4 py-8 md:py-12"
+      className="bg-green-700 bg-repeat px-4 py-8 md:py-12 mb-20"
       style={{
         backgroundImage: "url('/images/cl bg.png')",
         backgroundSize: "auto",
         backgroundBlendMode: "overlay", 
       }}
     >
-      <div className="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6 items-center">
+      <div className="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6 items-center ">
         
         {/* 1. Left Box (Client Info) */}
       
