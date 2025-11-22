@@ -3,10 +3,10 @@ import { MapPin, Phone, Mail } from 'lucide-react';
 
 export default function KrishiAloFooter() {
   return (
-    <div className="w-full relative bg-[#002201] pt-24 mt-65">
+    <div className="w-full relative bg-[#002201] sm:mt-30 sm:pt-24 md:mt-20 pt-24 lg:mt-65  ">
 
       {/* CTA Section  */}
-      <div className="relative z-10 mx-auto max-w-[1200px] px-4 -mt-36 md:-mt-40 lg:-mt-80">
+      <div className="relative z-10 mx-auto max-w-[1200px] px-4 sm:-mt-80 md:-mt-40 lg:-mt-80">
        
         <div className="bg-green-600 rounded-3xl p-6 sm:p-10 lg:p-16 text-center shadow-2xl">
           <h2 className="text-2xl text-white md:text-4xl font-bold mb-4">
