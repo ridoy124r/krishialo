@@ -3,8 +3,8 @@ import { Leaf, Handshake, ArrowRight } from 'lucide-react';
 
 export default function AgriSolutions() {
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center px-4 md:px-8 lg:px-0">
-      <div className="w-full max-w-[1440px] py-10 md:py-16 lg:py-[60px] lg:min-h-[1024px]">
+    <div className="min-h-scree bg-white flex items-center justify-center px-4 md:px-8 lg:px-0">
+      <div className="w-full max-w-[1440px] py-10 md:py-16 lg:py-[60px] lg:min-">
         {/* Header Text */}
         <div className="mb-3 text-center lg:text-left">
           <p className="text-gray-600 text-sm md:text-base">
@@ -13,7 +13,7 @@ export default function AgriSolutions() {
         </div>
 
         {/* Main Content Grid */}
-        <div className="grid lg:grid-cols-2 gap-6 lg:gap-[40px] items-start">
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-10 items-start">
           {/* Left Column */}
           <div className="space-y-8 pl-4 md:pl-6 lg:pl-8">
             {/* Main Heading */}
@@ -108,9 +108,6 @@ export default function AgriSolutions() {
                 <ArrowRight className="w-4 h-4" />
               </button>
 
-              <button className="bg-white hover:bg-gray-50 text-gray-900 px-6 md:px-8 py-3 rounded-lg font-medium border-2 border-gray-300 transition-colors duration-200 shadow-sm">
-                Contact Us
-              </button>
             </div>
           </div>
         </div>

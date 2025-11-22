@@ -23,7 +23,7 @@ export default function LeadingTeam() {
   ];
 
   return (
-    <div className="min-h-screen bg-linear-to-b from-green-50 to-green-100 py-16 px-6">
+    <div className=" bg-linear-to-b from-green-50 to-green-100 py-16 px-6">
       <div className="max-w-[1440px] mx-auto">
         {/* Section Title */}
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#003B15] text-center mb-16">

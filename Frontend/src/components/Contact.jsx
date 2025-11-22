@@ -22,21 +22,16 @@ export default function AgriTechContact() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 md:p-8">
+    <div className="flex items-center justify-center p-4 md:p-8 ">
       <div className="w-full max-w-[1440px]">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Left Section */}
           <div className="flex flex-col items-center lg:items-start space-y-6">
-            {/* Get in touch badge */}
-            <button className="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-gray-300 rounded-full text-gray-700 font-medium hover:border-green-500 hover:text-green-600 transition-colors">
-              <Phone className="w-4 h-4" />
-              Get in touch
-            </button>
-
+           
             {/* Heading */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight text-center lg:text-left">
+            <h2 className="text-[20px] sm:text-2xl md:text-[35px] lg:text-[24px]  font-bold text-gray-900 text-center lg:text-left whitespace-nowrap overflow-x-auto">
               Need Smart Agri-Tech Solutions?
-            </h1>
+            </h2>
 
             {/* Image */}
             <div className="w-full max-w-lg sm:max-w-xl lg:max-w-[650px] h-auto rounded-3xl overflow-hidden border border-[#009735]">
