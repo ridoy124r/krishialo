@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { TrendingUp, Leaf, Activity, Eye, EyeOff, Mail, Phone, MapPin, Camera } from "lucide-react";
 
-// LeftPanel Component
+
 function LeftPanel() {
   return (
     <div className="relative w-full max-w-[765px] h-[845px] rounded-tl-2xl rounded-bl-2xl overflow-hidden">
@@ -68,7 +68,7 @@ function LeftPanel() {
   );
 }
 
-// RightPanel / UserRegistration Component
+
 function UserRegistration() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
