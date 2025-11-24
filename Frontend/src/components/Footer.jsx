@@ -1,12 +1,13 @@
 import React from 'react';
 import { MapPin, Phone, Mail } from 'lucide-react';
-
+ 
 export default function KrishiAloFooter() {
   return (
-    <div className="w-full relative bg-[#002201] pt-24 mt-65">
+    <div className="w-full relative bg-[#002201] pt-24 sm:mt-25 lg:mt-65">
+ 
       {/* CTA Section  */}
-
       <div className="relative z-10 mx-auto max-w-[1200px] px-4 -mt-36 md:-mt-40 lg:-mt-80">
+       
         <div className="bg-green-600 rounded-3xl p-6 sm:p-10 lg:p-16 text-center shadow-2xl">
           <h2 className="text-2xl text-white md:text-4xl font-bold mb-4">
             Let's book a Service!
@@ -22,10 +23,11 @@ export default function KrishiAloFooter() {
             BOOK A SERVICE
           </button>
         </div>
+ 
       </div>
-
+ 
       {/* Footer Content Section */}
-
+ 
       <div className="px-4 pt-12 md:pt-16 pb-6">
         <div className="max-w-[1440px] mx-auto ">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-16">
@@ -40,7 +42,7 @@ export default function KrishiAloFooter() {
                 energy, and more. Trusted by enterprises across India.
               </p>
             </div>
-
+ 
             {/* Service Links */}
             <div className="md:pl-8 lg:pl-0">
               <h3 className="text-white text-xl font-bold mb-6">Service</h3>
@@ -79,7 +81,7 @@ export default function KrishiAloFooter() {
                 </li>
               </ul>
             </div>
-
+ 
             {/* Company Links */}
             <div>
               <h3 className="text-white text-xl font-bold mb-6">Company</h3>
@@ -100,7 +102,7 @@ export default function KrishiAloFooter() {
                     Privacy Policy
                   </a>
                 </li>
-
+ 
                 <li>
                   <a
                     href="#"
@@ -111,7 +113,7 @@ export default function KrishiAloFooter() {
                 </li>
               </ul>
             </div>
-
+ 
             {/* Contact Info */}
             <div>
               <h3 className="text-white text-xl font-bold mb-6">Contact</h3>
@@ -140,9 +142,9 @@ export default function KrishiAloFooter() {
                 </li>
               </ul>
             </div>
-
+ 
             {/* Social Media Icons */}
-
+ 
             <div className="flex gap-4 pt-4">
               {[
                 'M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z',
@@ -162,7 +164,7 @@ export default function KrishiAloFooter() {
                   </svg>
                 </a>
               ))}
-
+ 
               <a
                 href="#"
                 className="w-10 h-10 bg-black/30 hover:bg-green-600 rounded-full flex items-center justify-center transition-colors"
@@ -191,7 +193,7 @@ export default function KrishiAloFooter() {
           </div>
         </div>
       </div>
-
+ 
       {/* Copyright Section */}
       <div className="pt-3 pb-3 text-center bg-black">
         <p className="text-gray-400 text-sm">
