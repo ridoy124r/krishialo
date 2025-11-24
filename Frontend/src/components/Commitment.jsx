@@ -1,17 +1,17 @@
 import React from 'react';
 import { Leaf, Handshake, ArrowRight } from 'lucide-react';
-
+ 
 export default function AgriSolutions() {
   return (
     <div className="min-h-scree bg-white flex items-center justify-center px-4 md:px-8 lg:px-0">
       <div className="w-full max-w-[1440px] py-10 md:py-16 lg:py-[60px] lg:min-">
         {/* Header Text */}
-        <div className="mb-3 text-center lg:text-left">
-          <p className="text-gray-600 text-sm md:text-base">
+        <div className=" mb-3 pl-4 md:pl-6 lg:pl-8 text-center lg:text-left ">
+          <p className="text-[gray-600] text-sm md:text-base">
             Delivering sustainable and innovative agriculture solutions
           </p>
         </div>
-
+ 
         {/* Main Content Grid */}
         <div className="grid lg:grid-cols-2 gap-6 lg:gap-10 items-start">
           {/* Left Column */}
@@ -21,7 +21,7 @@ export default function AgriSolutions() {
               Our commitment is dual-fold: To produce quality crops today, while
               empowering the future of food production tomorrow.
             </h1>
-
+ 
             {/* Image */}
             <div className="rounded-3xl overflow-hidden border border-[#009735] w-full">
               <img
@@ -31,7 +31,7 @@ export default function AgriSolutions() {
               />
             </div>
           </div>
-
+ 
           {/* Right Column */}
           <div className="space-y-8">
             {/* Top Description */}
@@ -41,14 +41,14 @@ export default function AgriSolutions() {
                 crops and ecosystems from threats, ensuring a sound, sustainable,
                 and environmentally responsible food production.
               </p>
-
+ 
               <p className="text-gray-700 text-sm md:text-base leading-relaxed">
                 With 5 years of focused experience, we utilize deep industry
                 knowledge, fresh insights, and innovation expertise to create
                 impactful solutions for tomorrow.
               </p>
             </div>
-
+ 
             {/* Feature Cards */}
             <div className="space-y-6">
               {/* Card 1 */}
@@ -71,7 +71,7 @@ export default function AgriSolutions() {
                   </div>
                 </div>
               </div>
-
+ 
               {/* Card 2 */}
               <div className="border-t border-gray-300 pt-6">
                 <div className="flex gap-4 md:gap-6 items-start">
@@ -93,21 +93,21 @@ export default function AgriSolutions() {
                 </div>
               </div>
             </div>
-
+ 
             {/* Bottom Description */}
             <p className="text-gray-700 text-sm md:text-base leading-relaxed">
               Sitting at the heart of the global supply chain, we connect
               farmers, manufacturers, and retailers to source, create, and
               deliver the vital products essential for modern living.
             </p>
-
+ 
             {/* Buttons */}
             <div className="flex flex-wrap gap-4 pt-4">
               <button className="bg-green-600 hover:bg-green-700 text-white px-6 md:px-8 py-3 rounded-lg font-medium transition-all duration-200 flex items-center gap-2 shadow-md hover:shadow-lg">
                 More About Us
                 <ArrowRight className="w-4 h-4" />
               </button>
-
+ 
             </div>
           </div>
         </div>
@@ -115,3 +115,4 @@ export default function AgriSolutions() {
     </div>
   );
 }
+ 
