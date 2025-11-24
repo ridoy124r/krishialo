@@ -27,25 +27,24 @@ function Navbar() {
     { name: "Services", path: "/services" },
     { name: "Blog", path: "/blog" },
     { name: "Contact", path: "/contact" },
+
+
   ];
 
   const desktopLinkClass = ({ isActive }) =>
-    `pb-1 transition-all duration-200 ease-out ${
-      isActive
-        ? "text-green-700 border-b-2 border-green-700 font-medium scale-110"
-        : "text-gray-700 border-b-2 border-transparent hover:text-green-700 hover:border-green-700 hover:scale-105"
+    `pb-1 transition-all duration-200 ease-out ${isActive
+      ? "text-green-700 border-b-2 border-green-700 font-medium scale-110"
+      : "text-gray-700 border-b-2 border-transparent hover:text-green-700 hover:border-green-700 hover:scale-105"
     }`;
 
   const mobileLinkClass = ({ isActive }) =>
-    `block py-2 text-lg font-medium transition-all duration-300 ease-out ${
-      isActive ? "text-green-700 scale-110" : "text-gray-700 hover:text-green-700 hover:scale-105"
+    `block py-2 text-lg font-medium transition-all duration-300 ease-out ${isActive ? "text-green-700 scale-110" : "text-gray-700 hover:text-green-700 hover:scale-105"
     }`;
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white/70 shadow-md" : "bg-white/60"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "bg-white/70 shadow-md" : "bg-white/60"
+        }`}
     >
       <div className="w-full max-w-[1440px] mx-auto py-4 px-6 lg:px-[120px]">
         <div className="flex items-center justify-between">
@@ -70,15 +69,25 @@ function Navbar() {
           </nav>
 
           {/* Desktop Buttons */}
+          {/* Desktop Buttons */}
           <div className="hidden lg:flex items-center space-x-4">
-            <NavLink to="/services" className="flex items-center px-6 py-3 text-white text-sm font-medium bg-green-800 rounded-lg hover:bg-green-900 transition">
+
+            <NavLink
+              to="/regester"
+              className="flex items-center px-6 py-3 text-white text-sm font-medium bg-green-800 rounded-lg hover:bg-green-900 transition"
+            >
               Get Started
             </NavLink>
 
-            <button className="px-6 py-3 text-gray-800 text-sm font-medium border-2 border-gray-800 rounded-lg hover:bg-gray-800 hover:text-white transition">
+            <NavLink
+              to="/login"
+              className="px-6 py-3 text-gray-800 text-sm font-medium border-2 border-gray-800 rounded-lg hover:bg-gray-800 hover:text-white transition flex items-center justify-center"
+            >
               Sign In
-            </button>
+            </NavLink>
+
           </div>
+
 
           {/* Mobile Menu Button */}
           <button onClick={toggleMobileMenu} className="p-2 rounded-lg hover:bg-gray-100 transition lg:hidden" aria-label="Toggle menu">
@@ -114,15 +123,20 @@ function Navbar() {
                 </NavLink>
               ))}
             </nav>
-
             <div className="px-4 py-4 mt-auto space-y-3 border-t">
-              <NavLink to="/services" className="flex items-center justify-center w-full px-6 py-3 text-white font-medium bg-green-800 rounded-lg hover:bg-green-900 transition">
+              <NavLink
+                to="/regester"
+                className="flex items-center justify-center w-full px-6 py-3 text-white font-medium bg-green-800 rounded-lg hover:bg-green-900 transition"
+              >
                 Get Started
               </NavLink>
 
-              <button className="w-full px-6 py-3 text-gray-800 font-medium border-2 border-gray-800 rounded-lg hover:bg-gray-800 hover:text-white transition">
+              <NavLink
+                to="/login"
+                className="w-full px-6 py-3 text-gray-800 font-medium border-2 border-gray-800 rounded-lg hover:bg-gray-800 hover:text-white transition flex items-center justify-center"
+              >
                 Sign In
-              </button>
+              </NavLink>
             </div>
           </div>
         </div>

@@ -9,6 +9,8 @@ import Home from "./pages/Home";
 import ContactPage from "./pages/ContactPage";
 import Services from "./pages/Services";
 import About from "./pages/About";
+import Login from "./pages/Login";
+import Registration from "./pages/Registration";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -70,8 +72,41 @@ function AnimatedRoutes() {
             >
               <About />
             </motion.div>
+
           }
         />
+<Route
+          path="/login"
+          element={
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.5 }}
+              className="pt-28 lg:pt-32"
+            >
+             <Login />
+            </motion.div>
+            
+          }
+        />
+        <Route
+          path="/regester"
+          element={
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.5 }}
+              className="pt-28 lg:pt-32"
+            >
+           <Registration />
+            </motion.div>
+            
+          }
+        />
+
+
       </Routes>
     </AnimatePresence>
   );
