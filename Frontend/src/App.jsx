@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -15,6 +15,15 @@ import Blog from "./pages/Blog";
 
 function AnimatedRoutes() {
   const location = useLocation();
+
+  
+  useLayoutEffect(() => {
+    // For instant jump:
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    
+  }, [location.pathname]);
+
+ 
 
   return (
     <AnimatePresence mode="wait">
@@ -61,7 +70,6 @@ function AnimatedRoutes() {
             </motion.div>
           }
         />
-
         <Route
           path="/Blog"
           element={
@@ -72,11 +80,10 @@ function AnimatedRoutes() {
               transition={{ duration: 0.5 }}
               className=""
             >
-             <Blog />
+              <Blog />
             </motion.div>
           }
         />
-
         <Route
           path="/about"
           element={
@@ -89,7 +96,6 @@ function AnimatedRoutes() {
             >
               <About />
             </motion.div>
-
           }
         />
         <Route
@@ -104,7 +110,6 @@ function AnimatedRoutes() {
             >
               <Login />
             </motion.div>
-
           }
         />
         <Route
@@ -119,11 +124,8 @@ function AnimatedRoutes() {
             >
               <Registration />
             </motion.div>
-
           }
         />
-
-
       </Routes>
     </AnimatePresence>
   );
