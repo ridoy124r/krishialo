@@ -100,7 +100,7 @@ function AnimatedRoutes() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -50 }}
               transition={{ duration: 0.5 }}
-              className="pt-28 lg:pt-32"
+              className="pt-28 lg:pt-32 sm:pt-20"
             >
               <Login />
             </motion.div>
