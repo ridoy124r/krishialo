@@ -11,6 +11,7 @@ import Services from "./pages/Services";
 import About from "./pages/About";
 import Login from "./pages/Login";
 import Registration from "./pages/Registration";
+import Blog from "./pages/Blog";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -60,6 +61,22 @@ function AnimatedRoutes() {
             </motion.div>
           }
         />
+
+        <Route
+          path="/Blog"
+          element={
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.5 }}
+              className=""
+            >
+             <Blog />
+            </motion.div>
+          }
+        />
+
         <Route
           path="/about"
           element={
@@ -75,7 +92,7 @@ function AnimatedRoutes() {
 
           }
         />
-<Route
+        <Route
           path="/login"
           element={
             <motion.div
@@ -85,9 +102,9 @@ function AnimatedRoutes() {
               transition={{ duration: 0.5 }}
               className="pt-28 lg:pt-32"
             >
-             <Login />
+              <Login />
             </motion.div>
-            
+
           }
         />
         <Route
@@ -100,9 +117,9 @@ function AnimatedRoutes() {
               transition={{ duration: 0.5 }}
               className="pt-28 lg:pt-32"
             >
-           <Registration />
+              <Registration />
             </motion.div>
-            
+
           }
         />
 
