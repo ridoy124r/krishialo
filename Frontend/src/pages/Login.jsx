@@ -1,20 +1,52 @@
-// components/Login.jsx
+// pages/Login.jsx
 import React, { useState } from "react";
 import { TrendingUp, Leaf, Activity, Mail, Eye, EyeOff, Facebook, Instagram } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
+import { authAPI } from "../api/apiServices";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberPassword, setRememberPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
-  const handleSubmit = () => {
-    console.log("Login submitted:", { email, password, rememberPassword });
-   
-    navigate("/dashboard");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+
+    try {
+      const response = await authAPI.login({ email, password });
+      
+      // Save token and user info
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+      
+      // Optional: Remember password
+      if (rememberPassword) {
+        localStorage.setItem('rememberedEmail', email);
+      } else {
+        localStorage.removeItem('rememberedEmail');
+      }
+
+      // Redirect based on role
+      if (response.data.user.role === 'ADMIN') {
+        navigate('/admin/dashboard');
+      } else {
+        navigate('/');
+      }
+
+      console.log("Login successful:", response.data);
+    } catch (err) {
+      setError(err.response?.data?.message || 'Login failed. Please check your credentials.');
+      console.error('Login error:', err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -74,66 +106,78 @@ export default function Login() {
           <div className="w-[575px] h-[845px] rounded-tr-2xl rounded-br-2xl px-[107px] py-12 flex flex-col justify-center bg-white gap-[30px]">
             <h1 className="text-2xl font-bold text-center text-gray-800">User Log in</h1>
 
-            {/* Email */}
-            <div className="flex flex-col gap-2">
-              <label className="text-sm text-gray-600">Enter your Email</label>
-              <div className="relative">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your Email Here"
-                  className="w-full px-4 py-3 bg-green-50 border border-green-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-gray-700 placeholder-gray-400"
-                />
-                <Mail className="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+            {/* Error Message */}
+            {error && (
+              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+                {error}
               </div>
-            </div>
+            )}
 
-            {/* Password */}
-            <div className="flex flex-col gap-2">
-              <label className="text-sm text-gray-600">Enter your Password</label>
-              <div className="relative">
-                <input
-                  type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter your Password Here"
-                  className="w-full px-4 py-3 bg-green-50 border border-green-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-gray-700 placeholder-gray-400"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2"
-                >
-                  {showPassword ? <EyeOff className="w-5 h-5 text-gray-400" /> : <Eye className="w-5 h-5 text-gray-400" />}
-                </button>
+            <form onSubmit={handleSubmit}>
+              {/* Email */}
+              <div className="flex flex-col gap-2 mb-6">
+                <label className="text-sm text-gray-600">Enter your Email</label>
+                <div className="relative">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your Email Here"
+                    required
+                    className="w-full px-4 py-3 bg-green-50 border border-green-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-gray-700 placeholder-gray-400"
+                  />
+                  <Mail className="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                </div>
               </div>
-            </div>
 
-            {/* Remember */}
-            <div className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                id="remember"
-                checked={rememberPassword}
-                onChange={(e) => setRememberPassword(e.target.checked)}
-                className="w-4 h-4 text-green-500 border-gray-300 rounded focus:ring-green-500"
-              />
-              <label htmlFor="remember" className="text-sm text-gray-700">Remember Password?</label>
-            </div>
+              {/* Password */}
+              <div className="flex flex-col gap-2 mb-6">
+                <label className="text-sm text-gray-600">Enter your Password</label>
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Enter your Password Here"
+                    required
+                    className="w-full px-4 py-3 bg-green-50 border border-green-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-gray-700 placeholder-gray-400"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2"
+                  >
+                    {showPassword ? <EyeOff className="w-5 h-5 text-gray-400" /> : <Eye className="w-5 h-5 text-gray-400" />}
+                  </button>
+                </div>
+              </div>
 
-            {/* Login button */}
-            <button
-              onClick={handleSubmit}
-              className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 rounded-lg transition-colors duration-200"
-            >
-              Log In
-            </button>
+              {/* Remember */}
+              <div className="flex items-center gap-2 mb-6">
+                <input
+                  type="checkbox"
+                  id="remember"
+                  checked={rememberPassword}
+                  onChange={(e) => setRememberPassword(e.target.checked)}
+                  className="w-4 h-4 text-green-500 border-gray-300 rounded focus:ring-green-500"
+                />
+                <label htmlFor="remember" className="text-sm text-gray-700">Remember Password?</label>
+              </div>
+
+              {/* Login button */}
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 rounded-lg transition-colors duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed"
+              >
+                {loading ? 'Logging in...' : 'Log In'}
+              </button>
+            </form>
 
             {/* Register */}
             <p className="text-center text-sm text-gray-600">
               Don't Have an Account?{" "}
-              <Link to="/register" className="text-red-500 hover:text-red-600 font-medium">
+              <Link to="/regester" className="text-red-500 hover:text-red-600 font-medium">
                 Register now
               </Link>
             </p>
