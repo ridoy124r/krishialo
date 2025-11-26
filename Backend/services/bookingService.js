@@ -21,8 +21,14 @@ export const createBooking = async (userId, data) => {
 
   if (end <= start) throw new Error('End time must be after start time.');
 
+  // The Service ID from the client is a String UUID, matching the Service model's 'id' field.
   const service = await prisma.service.findUnique({ where: { id: serviceId } });
-  if (!service) throw new Error('Service not found.');
+  
+  if (!service) {
+    // This confirms the serviceId sent by the client does not match any record in the database.
+    console.error(`[BookingService Error] Failed to find service. ID received: ${serviceId}`);
+    throw new Error('Service not found.');
+  }
 
   const conflict = await prisma.booking.findFirst({
     where: {

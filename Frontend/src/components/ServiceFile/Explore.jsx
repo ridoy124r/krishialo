@@ -1,6 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function ServicesCards() {
+    const navigate = useNavigate();
+
     const services = [
         {
             title: "Smart Carping",
@@ -24,6 +27,11 @@ export default function ServicesCards() {
             image: "/images/e3.jpg"
         }
     ];
+
+    const handleBookNow = (service) => {
+        // Navigate to booking page and pass the service object
+        navigate('/book', { state: service });
+    };
 
     return (
         <div className="m bg-white py-16 px-4">
@@ -67,7 +75,10 @@ export default function ServicesCards() {
 
                                 {/* Button */}
                                 <div className="pb-6">
-                                    <button className="w-full bg-[#22c55e] hover:bg-[#1fb054] text-white font-semibold text-lg py-4 rounded-full transition-all duration-300 shadow-sm">
+                                    <button
+                                        onClick={() => handleBookNow(service)}
+                                        className="w-full bg-[#22c55e] hover:bg-[#1fb054] text-white font-semibold text-lg py-4 rounded-full transition-all duration-300 shadow-sm"
+                                    >
                                         Book Now
                                     </button>
                                 </div>

@@ -10,7 +10,7 @@ const Service1st = () => {
   return (
     <div>
       <SerHero/>
-      <Top/>
+      <Top />
       <Banner/>
       <Products/>
       <Explore/>
