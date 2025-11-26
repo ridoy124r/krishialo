@@ -1,7 +1,6 @@
 import React from "react";
-import { Tv, Wifi, Truck } from "lucide-react";
 import { motion } from "framer-motion";
- 
+
 const ServiceCard = ({ icon: Icon, title, description, image, delay }) => {
   return (
     <motion.div
@@ -23,15 +22,15 @@ const ServiceCard = ({ icon: Icon, title, description, image, delay }) => {
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent
                           translate-x-[-200%] group-hover:translate-x-[200%] duration-700 ease-out"></div>
         </div>
- 
+
         {/* Glow Bottom */}
         <div className="absolute -bottom-6 left-6 w-[80%] h-10 blur-2xl rounded-full bg-green-500/20 group-hover:bg-green-500/40 transition-all duration-500"></div>
- 
+
         {/* Image */}
         <div className="h-56 relative overflow-hidden">
           <img src={image} alt={title} className="w-full h-full object-cover group-hover:scale-110 duration-500" />
         </div>
- 
+
         {/* Floating Icon */}
         <motion.div
           initial={{ opacity: 0, scale: 0.5, y: 10 }}
@@ -40,15 +39,14 @@ const ServiceCard = ({ icon: Icon, title, description, image, delay }) => {
           className="absolute z-10 top-50 left-6 bg-green-900 p-4 rounded-xl
                      shadow-xl border-2 border-white"
         >
-          <Icon className="w-5 h-5 text-white" strokeWidth={3} />
+          <Icon className="w-8 h-8 text-white" />
         </motion.div>
- 
+
         {/* Content */}
-        <div className="bg-white p-7 pt-15  relative ">
+        <div className="bg-white p-7 pt-15 relative">
           <h3 className="text-xl font-bold text-gray-900 mb-2">{title}</h3>
           <p className="text-gray-600 text-sm mb-5 leading-relaxed">{description}</p>
- 
-          {/* --- ORANGE HOVER BUTTON (UPDATED) --- */}
+
           <a
             href="#"
             className="text-orange-500 font-semibold text-sm inline-flex items-center gap-1
@@ -64,32 +62,44 @@ const ServiceCard = ({ icon: Icon, title, description, image, delay }) => {
     </motion.div>
   );
 };
- 
+
 export default function HighlightedServices({ backgroundImage = "/images/bg pic.png" }) {
   const services = [
     {
       id: 1,
-      icon: Tv,
+      icon: (props) => (
+        <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}>
+          <path fill="currentColor" d="M4 20q0-1.875 1.025-3.363t2.65-2.162L7.425 12H4V6H1V4h8v2H6v4h1.2L7 8h10l-.2 2H18V6h-3V4h8.025v2h-3v6H16.6l-.25 2.475q1.625.675 2.638 2.163T20 20h-2q0-1.65-1.175-2.825T14 16h-4q-1.65 0-2.825 1.175T6 20zm5.625-6h4.725l.425-4H9.2zm0 0h4.725z"></path>
+        </svg>
+      ),
       title: "Drone Surveillance",
       description: "Monitor fields in real-time with automated drone coverage.",
       image: "/images/card1.png",
     },
     {
       id: 2,
-      icon: Wifi,
+      icon: (props) => (
+        <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}>
+          <path fill="currentColor" d="M12.339 2.009L12 4a6 6 0 0 0-4.686 9.748c.086.107.806.853.917.974c.997 1.084 1.61 2.076 1.742 3.278h4.054c.132-1.201.745-2.193 1.74-3.277c.113-.122.83-.866.917-.973A5.97 5.97 0 0 0 18 10l1.99-.34q.009.17.01.34a7.97 7.97 0 0 1-1.756 5.001C17.624 15.774 16 17 16 18.5V21a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-2.5c0-1.5-1.625-2.727-2.246-3.501a8 8 0 0 1 6.585-12.99M10 21h4v-1h-4zM17.53.328a.507.507 0 0 1 .94 0l.254.612a4.37 4.37 0 0 0 2.25 2.326l.718.32a.53.53 0 0 1 0 .962l-.76.338a4.36 4.36 0 0 0-2.218 2.251l-.247.565a.506.506 0 0 1-.934 0l-.246-.565a4.36 4.36 0 0 0-2.22-2.251l-.76-.338a.53.53 0 0 1 0-.963l.718-.32A4.37 4.37 0 0 0 17.276.94z"></path>
+        </svg>
+      ),
       title: "IoT Implementation",
       description: "Turn farms smart with fully integrated IoT ecosystems.",
       image: "/images/card2.png",
     },
     {
       id: 3,
-      icon: Truck,
+      icon: (props) => (
+        <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}>
+          <path fill="currentColor" d="M5.5 14a2.5 2.5 0 0 1 2.45 2H15V6H4a2 2 0 0 0-2 2v8h1.05a2.5 2.5 0 0 1 2.45-2m0 5a2.5 2.5 0 0 1-2.45-2H1V8a3 3 0 0 1 3-3h11a1 1 0 0 1 1 1v2h3l3 4v5h-2.05a2.5 2.5 0 0 1-4.9 0h-7.1a2.5 2.5 0 0 1-2.45 2m0-4A1.5 1.5 0 0 0 4 16.5A1.5 1.5 0 0 0 5.5 18A1.5 1.5 0 0 0 7 16.5A1.5 1.5 0 0 0 5.5 15m12-1a2.5 2.5 0 0 1 2.45 2H21v-3.68l-.24-.32H16v2.5c.42-.31.94-.5 1.5-.5m0 1a1.5 1.5 0 0 0-1.5 1.5a1.5 1.5 0 0 0 1.5 1.5a1.5 1.5 0 0 0 1.5-1.5a1.5 1.5 0 0 0-1.5-1.5M16 9v2h4l-1.5-2z"></path>
+        </svg>
+      ),
       title: "Smart Logistics",
       description: "Seamless supply chain tracking with real-time smart sensors.",
       image: "/images/card3.png",
     },
   ];
- 
+
   return (
     <div className="w-full py-20 flex justify-center items-center relative">
       <div
@@ -97,7 +107,7 @@ export default function HighlightedServices({ backgroundImage = "/images/bg pic.
         style={{ backgroundImage: `url('${backgroundImage}')` }}
       ></div>
       <div className="absolute inset-0 bg-[#1E522C66]"></div>
- 
+
       <div className="w-full max-w-[1400px] relative z-10 px-6 md:px-12">
         <motion.h2
           initial={{ opacity: 0, y: -40, scale: 0.95 }}
@@ -109,7 +119,7 @@ export default function HighlightedServices({ backgroundImage = "/images/bg pic.
         >
           Our <span className="text-green-300">Highlighted</span> Services
         </motion.h2>
- 
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 px-6">
           {services.map((service, index) => (
             <ServiceCard

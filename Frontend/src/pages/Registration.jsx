@@ -15,61 +15,71 @@ import { Link, useNavigate } from "react-router-dom";
 
 function LeftPanel() {
   return (
-    <div className="relative w-full max-w-[765px] h-[845px] rounded-tl-2xl rounded-bl-2xl overflow-hidden">
+    <div className="relative w-full max-w-[765px] min-h-[300px] sm:min-h-[350px] md:min-h-[400px] lg:min-h-[500px] xl:min-h-full rounded-tl-2xl rounded-bl-2xl overflow-hidden">
+
       {/* Background Image */}
       <div
         className="absolute inset-0 w-full h-full bg-cover bg-center"
         style={{ backgroundImage: "url('/images/Whisk.jpg')" }}
       />
+
       {/* Green overlay */}
       <div className="absolute inset-0" style={{ backgroundColor: "#0E6F4D96" }} />
 
       {/* Content */}
-      <div className="relative flex flex-col justify-between px-12 py-12 text-white h-full">
+      <div className="relative flex flex-col justify-between px-6 sm:px-10 md:px-12 py-10 text-white h-full">
+
         {/* Logo */}
-        <div className="w-[139px] h-[57px] flex items-center">
-          <img src="/images/image 4.png" alt="Logo" className="w-full h-full object-contain" />
+        <div className="w-[120px] sm:w-[139px] h-[50px] sm:h-[57px] flex items-center">
+          <img
+            src="/images/image 4.png"
+            alt="Logo"
+            className="w-full h-full object-contain"
+          />
         </div>
 
         {/* Text */}
-        <div className="flex flex-col gap-6 max-w-[661px]">
-          <h1 className="text-5xl font-bold leading-tight">
+        <div className="flex flex-col gap-4 max-w-[600px]">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
             You grow the fields,
             <br />
             we power them with
             <br />
             SMART tech.
           </h1>
-          <p className="text-base opacity-90 leading-relaxed">
-            We integrate smart devices, automation, and drone technology <br />
+          <p className="text-sm sm:text-base opacity-90 leading-relaxed">
+            We integrate smart devices, automation, and drone technology
             to turn traditional farming into a connected, efficient ecosystem.
           </p>
         </div>
 
         {/* Feature Cards */}
-        <div className="flex gap-4 flex-wrap">
-          <div className="w-[210px] bg-white/10 border border-white/20 backdrop-blur-md p-6 text-white rounded-2xl hover:bg-white/15 transition-all duration-300">
-            <TrendingUp className="w-8 h-8 text-white mb-4" strokeWidth={2} />
-            <h3 className="font-bold text-xl leading-tight mb-3">Precision Farming</h3>
-            <p className="text-sm opacity-90 leading-relaxed">
-              Optimize resource use with data-driven insights for maximum yield and minimal waste
+        <div className="flex gap-3 sm:gap-4 flex-wrap">
+          <div className="w-[160px] sm:w-[210px] bg-white/10 border border-white/20 backdrop-blur-md p-4 sm:p-6 text-white rounded-2xl">
+            <TrendingUp className="w-6 h-6 sm:w-8 sm:h-8 text-white mb-3 sm:mb-4" />
+            <h3 className="font-bold text-lg sm:text-xl mb-2">Precision Farming</h3>
+            <p className="text-xs sm:text-sm opacity-90">
+              Optimize resource use with data-driven insights.
             </p>
           </div>
-          <div className="w-[210px] bg-white/10 border border-white/20 backdrop-blur-md p-6 text-white rounded-2xl hover:bg-white/15 transition-all duration-300">
-            <Leaf className="w-8 h-8 text-white mb-4" strokeWidth={2} />
-            <h3 className="font-bold text-xl leading-tight mb-3">Sustainable Yields</h3>
-            <p className="text-sm opacity-90 leading-relaxed">
-              Promote eco-friendly practices and enhance crop health for greener future
+
+          <div className="w-[160px] sm:w-[210px] bg-white/10 border border-white/20 backdrop-blur-md p-4 sm:p-6 text-white rounded-2xl">
+            <Leaf className="w-6 h-6 sm:w-8 sm:h-8 text-white mb-3 sm:mb-4" />
+            <h3 className="font-bold text-lg sm:text-xl mb-2">Sustainable Yields</h3>
+            <p className="text-xs sm:text-sm opacity-90">
+              Eco-friendly practices for greener farming.
             </p>
           </div>
-          <div className="w-[210px] bg-white/10 border border-white/20 backdrop-blur-md p-6 text-white rounded-2xl hover:bg-white/15 transition-all duration-300">
-            <Activity className="w-8 h-8 text-white mb-4" strokeWidth={2} />
-            <h3 className="font-bold text-xl leading-tight mb-3">Real-time insights</h3>
-            <p className="text-sm opacity-90 leading-relaxed">
-              Gain immediate access to critical field data to make informed, timely decisions
+
+          <div className="w-[160px] sm:w-[210px] bg-white/10 border border-white/20 backdrop-blur-md p-4 sm:p-6 text-white rounded-2xl">
+            <Activity className="w-6 h-6 sm:w-8 sm:h-8 text-white mb-3 sm:mb-4" />
+            <h3 className="font-bold text-lg sm:text-xl mb-2">Real-time insights</h3>
+            <p className="text-xs sm:text-sm opacity-90">
+              Get critical field data instantly.
             </p>
           </div>
         </div>
+
       </div>
     </div>
   );
@@ -79,6 +89,7 @@ function UserRegistration() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
+
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -101,162 +112,151 @@ function UserRegistration() {
       alert("Please accept the Terms and Conditions");
       return;
     }
-    console.log("Form submitted:", formData);
     alert("Account created successfully!");
     navigate("/login");
   };
 
   return (
-    <div className="w-[500px] max-w-full h-[845px] rounded-tr-2xl rounded-br-2xl px-10 py-8 flex flex-col justify-between bg-white">
-      <div className="flex flex-col gap-3">
-        <h1 className="text-2xl font-bold text-center text-gray-800 mb-4">User Registration</h1>
+    <div className="w-full max-w-[500px] px-6 sm:px-8 md:px-10 py-8 bg-white rounded-tr-2xl rounded-br-2xl">
 
-        {/* Profile Photo */}
-        <div className="flex flex-col items-center mb-4">
-          <div className="w-24 h-24 bg-green-600 rounded-full flex items-center justify-center cursor-pointer hover:bg-green-700 transition-colors">
-            <Camera className="w-10 h-10 text-white" />
-          </div>
-          <p className="mt-2 text-gray-700 font-medium text-sm">Add Photo</p>
+      <h1 className="text-xl sm:text-2xl font-bold text-center text-gray-800 mb-4">
+        User Registration
+      </h1>
+
+      {/* Profile Photo */}
+      <div className="flex flex-col items-center mb-4">
+        <div className="w-20 h-20 sm:w-24 sm:h-24 bg-green-600 rounded-full flex items-center justify-center cursor-pointer hover:bg-green-700 transition">
+          <Camera className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
         </div>
-
-        {/* Form Fields */}
-        <div className="flex flex-col gap-3">
-          {/* Full Name */}
-          <div>
-            <label className="text-sm text-gray-600">Full Name</label>
-            <input
-              type="text"
-              name="fullName"
-              value={formData.fullName}
-              onChange={handleInputChange}
-              placeholder="Enter your full name"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg mt-1 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-gray-700 text-sm"
-            />
-          </div>
-
-          {/* Email */}
-          <div>
-            <label className="text-sm text-gray-600">Email</label>
-            <div className="relative mt-1">
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                placeholder="Enter your email"
-                className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg bg-green-50 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-gray-700 text-sm"
-              />
-              <Mail className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-            </div>
-          </div>
-
-          {/* Phone */}
-          <div>
-            <label className="text-sm text-gray-600">Phone Number</label>
-            <div className="relative mt-1">
-              <input
-                type="tel"
-                name="phone"
-                value={formData.phone}
-                onChange={handleInputChange}
-                placeholder="Enter your phone number"
-                className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg bg-green-50 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-gray-700 text-sm"
-              />
-              <Phone className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-            </div>
-          </div>
-
-          {/* Password */}
-          <div>
-            <label className="text-sm text-gray-600">Password</label>
-            <div className="relative mt-1">
-              <input
-                type={showPassword ? "text" : "password"}
-                name="password"
-                value={formData.password}
-                onChange={handleInputChange}
-                placeholder="Enter your password"
-                className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg bg-green-50 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-gray-700 text-sm"
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-              >
-                {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-              </button>
-            </div>
-          </div>
-
-          {/* Confirm Password */}
-          <div>
-            <label className="text-sm text-gray-600">Confirm Password</label>
-            <div className="relative mt-1">
-              <input
-                type={showConfirmPassword ? "text" : "password"}
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleInputChange}
-                placeholder="Confirm your password"
-                className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg bg-green-50 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-gray-700 text-sm"
-              />
-              <button
-                type="button"
-                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-              >
-                {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-              </button>
-            </div>
-          </div>
-
-          {/* Location */}
-          <div>
-            <label className="text-sm text-gray-600">Location</label>
-            <div className="relative mt-1">
-              <input
-                type="text"
-                name="location"
-                value={formData.location}
-                onChange={handleInputChange}
-                placeholder="Enter your location"
-                className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg bg-green-50 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-gray-700 text-sm"
-              />
-              <MapPin className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-            </div>
-          </div>
-        </div>
-
-        {/* Terms */}
-        <div className="flex items-center gap-2 mt-2">
-          <input
-            type="checkbox"
-            id="terms"
-            checked={acceptTerms}
-            onChange={(e) => setAcceptTerms(e.target.checked)}
-            className="w-4 h-4 text-green-500 border-gray-300 rounded focus:ring-green-500"
-          />
-          <label htmlFor="terms" className="text-sm text-gray-700">
-            I accept the{" "}
-            <Link to="#" className="text-green-700 underline hover:text-green-600">
-              Terms and Conditions
-            </Link>
-          </label>
-        </div>
-
-        {/* Submit */}
-        <button
-          onClick={handleSubmit}
-          className="w-full mt-4 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded-lg transition-colors text-sm"
-        >
-          Create Account
-        </button>
+        <p className="mt-2 text-gray-700 text-xs sm:text-sm">Add Photo</p>
       </div>
 
-      {/* Already have an account */}
-      <p className="text-center text-sm text-gray-600 mt-3">
+      {/* FORM FIELDS */}
+      <div className="flex flex-col gap-3">
+        {/* Full Name */}
+        <div>
+          <label className="text-xs sm:text-sm text-gray-600">Full Name</label>
+          <input
+            type="text"
+            name="fullName"
+            onChange={handleInputChange}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg mt-1 text-sm"
+            placeholder="Enter your full name"
+          />
+        </div>
+
+        {/* Email */}
+        <div>
+          <label className="text-xs sm:text-sm text-gray-600">Email</label>
+          <div className="relative mt-1">
+            <input
+              type="email"
+              name="email"
+              onChange={handleInputChange}
+              className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg bg-green-50 text-sm"
+              placeholder="Enter your email"
+            />
+            <Mail className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+          </div>
+        </div>
+
+        {/* Phone */}
+        <div>
+          <label className="text-xs sm:text-sm text-gray-600">Phone Number</label>
+          <div className="relative mt-1">
+            <input
+              type="tel"
+              name="phone"
+              onChange={handleInputChange}
+              className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg bg-green-50 text-sm"
+              placeholder="Enter your phone number"
+            />
+            <Phone className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+          </div>
+        </div>
+
+        {/* Password */}
+        <div>
+          <label className="text-xs sm:text-sm text-gray-600">Password</label>
+          <div className="relative mt-1">
+            <input
+              type={showPassword ? "text" : "password"}
+              name="password"
+              onChange={handleInputChange}
+              className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg bg-green-50 text-sm"
+              placeholder="Enter password"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
+            >
+              {showPassword ? <EyeOff /> : <Eye />}
+            </button>
+          </div>
+        </div>
+
+        {/* Confirm Password */}
+        <div>
+          <label className="text-xs sm:text-sm text-gray-600">Confirm Password</label>
+          <div className="relative mt-1">
+            <input
+              type={showConfirmPassword ? "text" : "password"}
+              name="confirmPassword"
+              onChange={handleInputChange}
+              className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg bg-green-50 text-sm"
+              placeholder="Confirm password"
+            />
+            <button
+              type="button"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
+            >
+              {showConfirmPassword ? <EyeOff /> : <Eye />}
+            </button>
+          </div>
+        </div>
+
+        {/* Location */}
+        <div>
+          <label className="text-xs sm:text-sm text-gray-600">Location</label>
+          <div className="relative mt-1">
+            <input
+              type="text"
+              name="location"
+              onChange={handleInputChange}
+              className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg bg-green-50 text-sm"
+              placeholder="Enter location"
+            />
+            <MapPin className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+          </div>
+        </div>
+      </div>
+
+      {/* TERMS */}
+      <div className="flex items-center gap-2 mt-3">
+        <input
+          type="checkbox"
+          className="w-4 h-4"
+          onChange={(e) => setAcceptTerms(e.target.checked)}
+        />
+        <label className="text-xs sm:text-sm text-gray-700">
+          I accept the{" "}
+          <Link className="text-green-700 underline">Terms and Conditions</Link>
+        </label>
+      </div>
+
+      {/* SUBMIT */}
+      <button
+        onClick={handleSubmit}
+        className="w-full mt-4 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded-lg text-sm"
+      >
+        Create Account
+      </button>
+
+      <p className="text-center text-xs sm:text-sm text-gray-600 mt-3">
         Already have an account?{" "}
-        <Link to="/login" className="text-red-500 hover:text-red-600 font-medium">
+        <Link to="/login" className="text-red-500">
           Sign in here
         </Link>
       </p>
@@ -264,21 +264,23 @@ function UserRegistration() {
   );
 }
 
-// Main Registration Page
 export default function Registration() {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
-      <div className="flex w-full max-w-[1440px] h-[845px] rounded-2xl overflow-hidden shadow-lg bg-white">
-        {/* Left Panel - show only on xl screens */}
+
+      <div className="flex flex-col xl:flex-row w-full max-w-[1440px] rounded-2xl overflow-hidden shadow-lg bg-white">
+
+        {/* LEFT */}
         <div className="hidden xl:flex">
           <LeftPanel />
         </div>
 
-        {/* Right Panel */}
-        <div className="flex-1 flex justify-center items-center p-4">
+        {/* RIGHT */}
+        <div className="flex flex-1 justify-center items-center p-4">
           <UserRegistration />
         </div>
       </div>
+
     </div>
   );
 }

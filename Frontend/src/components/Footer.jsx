@@ -1,5 +1,6 @@
 import React from 'react';
 import { MapPin, Phone, Mail } from 'lucide-react';
+import { NavLink } from 'react-router-dom';
  
 export default function KrishiAloFooter() {
   return (
@@ -19,9 +20,11 @@ export default function KrishiAloFooter() {
             efficiency, and safety every time. Book today and experience the
             future of aerial solutions.
           </p>
-          <button className="bg-[#BB2525] hover:bg-red-800 text-white font-bold px-6 py-3 rounded-lg text-base md:text-lg transition-colors shadow-lg whitespace-nowrap">
+          <NavLink to ="/services">
+          <button className="bg-red-600 hover:bg-red-800 text-white font-bold px-6 py-3 rounded-lg text-base md:text-lg transition-colors shadow-lg whitespace-nowrap">
             BOOK A SERVICE
           </button>
+          </NavLink>
         </div>
  
       </div>

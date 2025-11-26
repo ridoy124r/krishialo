@@ -1,5 +1,6 @@
 import React from 'react';
 import { Leaf, Handshake, ArrowRight } from 'lucide-react';
+import { NavLink } from 'react-router-dom';
  
 export default function AgriSolutions() {
   return (
@@ -103,10 +104,12 @@ export default function AgriSolutions() {
  
             {/* Buttons */}
             <div className="flex flex-wrap gap-4 pt-4">
+              <NavLink to ="/About">
               <button className="bg-green-600 hover:bg-green-700 text-white px-6 md:px-8 py-3 rounded-lg font-medium transition-all duration-200 flex items-center gap-2 shadow-md hover:shadow-lg">
                 More About Us
                 <ArrowRight className="w-4 h-4" />
               </button>
+              </NavLink>
  
             </div>
           </div>

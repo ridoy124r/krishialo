@@ -8,22 +8,25 @@ export default function LeadingTeam() {
     {
       name: "Sahin Alam",
       role: "UI/UX Designer",
-      image: "/public/images/sahin.png"
+      image: "/public/images/sahin.png",
+      portfolio: "https://www.behance.net/sa_hin"
     },
     {
       name: "Shamim Ahmmed",
       role: "Full Stack Developer",
-      image: "/public/images/shamim.png"
+      image: "/public/images/shamim.png",
+      portfolio: "https://github.com/Shamim24907"
     },
     {
       name: "Sheikh Ridoy",
       role: "Full Stack Developer",
-      image: "/public/images/ridoy.jpg"
+      image: "/public/images/ridoy.jpg",
+      portfolio: "https://github.com/ridoy124r"
     }
   ];
  
   return (
-    <div className=" bg-linear-to-b from-green-50 to-green-100 py-16 px-6">
+    <div className="bg-linear-to-b from-green-50 to-green-100 py-16 px-6">
       <div className="max-w-[1440px] mx-auto">
         {/* Section Title */}
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#003B15] text-center mb-16">
@@ -63,7 +66,7 @@ export default function LeadingTeam() {
               </div>
  
               {/* Hover Effect Line */}
-              <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 via-green-600 to-green-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+              <div className="absolute bottom-0 left-0 w-full h-1 bg-linear-to-r from-green-400 via-green-600 to-green-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
             </div>
           ))}
         </div>
@@ -123,7 +126,7 @@ export default function LeadingTeam() {
  
                   <div className="flex gap-3 mt-6">
                     <button
-                      onClick={() => window.open('#', '_blank')}
+                      onClick={() => window.open(selectedMember.portfolio, '_blank')}
                       className="px-5 py-2.5 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors duration-200 inline-flex items-center gap-2 text-sm"
                     >
                       Portfolio
