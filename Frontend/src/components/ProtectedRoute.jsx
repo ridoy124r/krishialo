@@ -3,13 +3,13 @@ import { Navigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 export default function ProtectedRoute({ children, adminOnly = false }) {
-  const { user, loading, isAdmin } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
 
-  if (loading) return <div>Loading...</div>; // You can use a spinner here
+  if (loading) return <div>Loading...</div>; // Or a loader
 
   if (!user) return <Navigate to="/login" replace />;
 
-  if (adminOnly && !isAdmin) return <Navigate to="/" replace />;
+  if (adminOnly && user.role !== "admin") return <Navigate to="/" replace />;
 
   return children;
 }
