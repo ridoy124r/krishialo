@@ -1,5 +1,5 @@
 // pages/Registration.jsx
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import {
   TrendingUp,
   Leaf,
@@ -12,7 +12,7 @@ import {
   Camera,
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext.jsx";
+import api from "../api/api"; // <-- use your api instance
 
 function LeftPanel() {
   return (
@@ -85,7 +85,6 @@ function UserRegistration() {
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
-  const { api } = useContext(AuthContext);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -93,24 +92,23 @@ function UserRegistration() {
   };
 
   const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      // Validate file size (5MB max)
-      if (file.size > 5 * 1024 * 1024) {
-        setError("Image size must be less than 5MB");
-        return;
-      }
-      
-  
-      if (!file.type.startsWith('image/')) {
-        setError("Please upload a valid image file");
-        return;
-      }
-      
-      setProfileImage(file);
-      setImagePreview(URL.createObjectURL(file));
-      setError("");
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Validate file size (5MB max)
+    if (file.size > 5 * 1024 * 1024) {
+      setError("Image size must be less than 5MB");
+      return;
     }
+
+    if (!file.type.startsWith("image/")) {
+      setError("Please upload a valid image file");
+      return;
+    }
+
+    setProfileImage(file);
+    setImagePreview(URL.createObjectURL(file));
+    setError("");
   };
 
   const handleSubmit = async (e) => {
@@ -135,32 +133,55 @@ function UserRegistration() {
     setLoading(true);
 
     try {
-      
       const registrationData = new FormData();
       registrationData.append("fullName", formData.fullName);
       registrationData.append("email", formData.email);
       registrationData.append("phone", formData.phone);
       registrationData.append("password", formData.password);
       registrationData.append("location", formData.location);
-      
-      
+
       if (profileImage) {
         registrationData.append("profileImage", profileImage);
       }
 
-     
-      const response = await api.post("/auth/register", registrationData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      // Debug logs to help if something is undefined at runtime
+      console.log("Debug: api import ->", api);
+      console.log("Has api.post?:", !!(api && typeof api.post === "function"));
 
-      console.log("Registration successful:", response.data);
+      // Preferred: use axios instance from src/api/api.js
+      if (api && typeof api.post === "function") {
+        // For multipart/form-data, axios can handle boundary automatically.
+        const resp = await api.post("/auth/register", registrationData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        console.log("Registration successful (axios):", resp?.data ?? resp);
+        alert("Account created successfully! Please login.");
+        navigate("/login");
+        return;
+      }
+
+      // Fallback: direct fetch (use full URL)
+      console.warn("api.post not available — falling back to fetch");
+      const base = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+      const res = await fetch(`${base}/auth/register`, {
+        method: "POST",
+        body: registrationData, // FormData is fine with fetch
+      });
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(`Server error: ${res.status} ${text}`);
+      }
+      const data = await res.json();
+      console.log("Registration successful (fetch):", data);
       alert("Account created successfully! Please login.");
       navigate("/login");
     } catch (err) {
-      setError(err.message || "Registration failed. Please try again.");
       console.error("Registration error:", err);
+      // prefer server error message if available
+      const serverMessage = err?.response?.data?.message || err?.message;
+      setError(serverMessage || "Registration failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -268,6 +289,7 @@ function UserRegistration() {
                   onChange={handleInputChange}
                   placeholder="Enter your password"
                   required
+                  autoComplete="new-password"
                   className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg bg-green-50 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-gray-700 text-sm"
                 />
                 <button
@@ -291,6 +313,7 @@ function UserRegistration() {
                   onChange={handleInputChange}
                   placeholder="Confirm your password"
                   required
+                  autoComplete="new-password"
                   className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg bg-green-50 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-gray-700 text-sm"
                 />
                 <button

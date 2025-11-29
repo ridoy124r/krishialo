@@ -58,7 +58,7 @@ export default function Login() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
+    <div className="flex justify-center items-center  bg-gray-100 p-4">
       <div className="flex w-full max-w-[1440px] h-[845px] rounded-2xl overflow-hidden shadow-lg bg-white">
 
         {/* Left Panel */}
