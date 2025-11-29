@@ -1,0 +1,6 @@
+-- AlterEnum
+ALTER TYPE "PaymentStatus" ADD VALUE 'PENDING';
+
+-- AlterTable
+ALTER TABLE "Booking" ADD COLUMN     "totalCost" DOUBLE PRECISION NOT NULL DEFAULT 0,
+ALTER COLUMN "paymentStatus" SET DEFAULT 'PENDING';

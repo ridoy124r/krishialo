@@ -125,11 +125,6 @@ function UserRegistration() {
         location: formData.location,
       };
 
-      // Optional: If backend supports file upload, you can use FormData:
-      // const formPayload = new FormData();
-      // Object.entries(registrationData).forEach(([key, value]) => formPayload.append(key, value));
-      // if(profileImage) formPayload.append('profileImage', profileImage);
-      // const response = await authAPI.register(formPayload);
 
       const response = await authAPI.register(registrationData);
 

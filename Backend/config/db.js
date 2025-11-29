@@ -1,4 +1,4 @@
-// config/db.js
+
 import pkg from '@prisma/client';
 const { PrismaClient } = pkg;
 

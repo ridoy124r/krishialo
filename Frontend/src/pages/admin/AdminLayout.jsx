@@ -3,16 +3,16 @@ import React, { useContext } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { Home, Users, Settings, ClipboardList, CreditCard } from "lucide-react";
 
-// Import AuthContext correctly
+
 import { AuthContext } from "../../context/AuthContext";
 
-// Import apiServices correctly
+
 import apiServices from "../../api/apiServices";
 const { authAPI } = apiServices;
 
 const AdminLayout = () => {
   const location = useLocation();
-  const { user } = useContext(AuthContext); // example usage if needed
+  const { user } = useContext(AuthContext); 
 
   const navItems = [
     { name: "Dashboard", path: "/admin/dashboard", icon: <Home className="w-5 h-5" /> },
@@ -24,7 +24,7 @@ const AdminLayout = () => {
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
-      <aside className="w-64 bg-white shadow-md flex flex-col">
+      <aside className="w-64 mt-25 bg-white shadow-md flex flex-col">
         <div className="h-20 flex items-center justify-center font-bold text-xl border-b">
           Admin Panel
         </div>
@@ -44,7 +44,7 @@ const AdminLayout = () => {
         </nav>
       </aside>
 
-      {/* Main Content */}
+     
       <main className="flex-1 p-6 overflow-y-auto">
         <Outlet />
       </main>

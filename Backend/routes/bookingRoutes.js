@@ -1,24 +1,29 @@
+// routes/bookingRoutes.js
 import express from 'express';
-import * as bookingCtrl from '../controllers/bookingController.js';
+import {
+  listBookingsForUser,
+  createBooking,
+  listAllBookings,
+  debugBooking,
+  createCheckoutSession,  // ✅ NEW
+  handleStripeWebhook,    // ✅ NEW
+  verifyPayment,          // ✅ NEW
+} from '../controllers/bookingController.js';
+
 import { protect, admin } from '../middleware/authMiddleware.js';
-import { createPaymentIntent } from '../controllers/paymentsController.js';
 
 const router = express.Router();
 
-// user endpoints
-router.get('/', protect, bookingCtrl.listBookingsForUser);
-router.post('/', protect, bookingCtrl.createBooking);
+// ✅ NEW: Stripe Checkout Session (protected route)
+router.post('/create-checkout-session', protect, createCheckoutSession);
 
-// stripe payment route
-router.post('/create-payment-intent', protect, createPaymentIntent);
+// ✅ NEW: Verify payment after redirect (protected route)
+router.get('/verify-payment', protect, verifyPayment);
 
-// frontend-confirmation after successful card payment
-router.post('/payment-success', protect, bookingCtrl.paymentSuccess);
-
-// debug endpoint to inspect booking and ownership
-router.get('/debug/booking/:id', protect, bookingCtrl.debugBooking);
-
-// admin listing
-router.get('/all', protect, admin, bookingCtrl.listAllBookings);
+// Standard booking routes
+router.post('/', protect, createBooking);
+router.get('/me', protect, listBookingsForUser);
+router.get('/debug/:id', protect, debugBooking);
+router.get('/', protect, admin, listAllBookings);
 
 export default router;

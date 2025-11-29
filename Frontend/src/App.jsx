@@ -2,11 +2,10 @@ import React, { useLayoutEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 
-// FIX: Added .jsx extension to all local component and page imports
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 
-// Public Pages (assuming these paths are correct relative to App.jsx)
+
 import Home from "./pages/Home.jsx";
 import ContactPage from "./pages/ContactPage.jsx";
 import Services from "./pages/Services.jsx";
@@ -23,10 +22,14 @@ import AdminServices from "./pages/admin/AdminServices.jsx";
 import AdminBookings from "./pages/admin/AdminBookings.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
-// Core Booking & Payment Imports
-// NOTE: I've added the .jsx extension explicitly for robustness
+import BookingSuccess from "./pages/booking/BookingSuccess.jsx";
+import BookingCancelled from "./pages/booking/BookingCancelled.jsx";
+
+
+
+
 import ServiceBookingForm from "./components/ServiceFile/Book.jsx"; 
-import PaymentStatus from "./components/Payment/PaymentStatus.jsx"; // <<< New Import
+import PaymentStatus from "./components/Payment/PaymentStatus.jsx"; 
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -48,16 +51,21 @@ function AnimatedRoutes() {
         <Route path="/regester" element={<PageWrapper pt><Registration /></PageWrapper>} />
         
         {/* Booking Routes */}
-        <Route path="/book" element={<PageWrapper><ServiceBookingForm /></PageWrapper>} />
+        <Route path="/book" element={<PageWrapper pt><ServiceBookingForm /></PageWrapper>} />
         
-        {/* Payment Confirmation/Return Route (Critical for external payment systems) */}
-        {/* This route is where Stripe (or mock-stripe) redirects the user after payment. */}
+        {/* ✅ NEW: Booking routes */}
+        
+        <Route path="/booking-success" element={<BookingSuccess />} />
+        <Route path="/booking-cancelled" element={<BookingCancelled />} />
+        
+       
+        
         <Route path="/payment-status" element={<PageWrapper><PaymentStatus /></PageWrapper>} />
         
         {/* Admin Routes */}
         <Route path="/admin" element={<ProtectedRoute adminOnly={true}><AdminLayout /></ProtectedRoute>}>
           <Route index element={<AdminDashboard />} />
-          <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="dashboard" element={<PageWrapper pt><AdminDashboard /></PageWrapper>} />
           <Route path="users" element={<AdminUsers />} />
           <Route path="services" element={<AdminServices />} />
           <Route path="bookings" element={<AdminBookings />} />

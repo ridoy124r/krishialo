@@ -1,3 +1,4 @@
+// server.js
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
@@ -8,6 +9,7 @@ import authRoutes from './routes/authRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import serviceRoutes from './routes/serviceRoutes.js';
 import bookingRoutes from './routes/bookingRoutes.js';
+import { handleStripeWebhook } from './controllers/bookingController.js';
 import { errorHandler } from './middleware/errorMiddleware.js';
 
 import path from 'path';
@@ -20,10 +22,6 @@ const app = express();
 
 // Security
 app.use(helmet());
-// Allow images and other static resources to be loaded cross-origin in dev.
-// Helmet sets Cross-Origin-Resource-Policy to 'same-origin' by default which
-// causes the browser to block cross-origin image requests with a 200 response.
-// Override it to 'cross-origin' for development static serving.
 if (helmet && helmet.crossOriginResourcePolicy) {
   app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
 }
@@ -36,6 +34,14 @@ app.use(
   })
 );
 
+
+app.post(
+  '/api/webhooks/stripe',
+  express.raw({ type: 'application/json' }),
+  handleStripeWebhook
+);
+
+
 app.use(express.json());
 
 // Rate Limit
@@ -46,7 +52,6 @@ const limiter = rateLimit({
 app.use(limiter);
 
 // Serve uploads folder
-// Serve uploads folder with permissive CORS for frontend dev servers
 app.use("/uploads", (req, res, next) => {
   const allowedOrigins = [
     'http://localhost:5173',
@@ -59,10 +64,8 @@ app.use("/uploads", (req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', origin);
     res.setHeader('Access-Control-Allow-Credentials', 'true');
   } else {
-    // Fallback for other dev setups; keep this permissive only for development
     res.setHeader('Access-Control-Allow-Origin', '*');
   }
-  // Allow cross-origin embedding of these resources (images/fonts) in dev
   res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
   res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
@@ -70,7 +73,6 @@ app.use("/uploads", (req, res, next) => {
   next();
 });
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-
 
 // API Routes
 app.use("/api/auth", authRoutes);

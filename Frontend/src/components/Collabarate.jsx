@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function CollaborationSlider() {
-  // Partner logos data
+ 
   const partners = [
     { id: 1, name: "Campbell's", logo: "/images/1.png" },
     { id: 2, name: "Celanese", logo: "images/2.png" },
@@ -9,7 +9,7 @@ export default function CollaborationSlider() {
     { id: 4, name: "Air Products", logo: "/images/4.png" },
   ];
 
-  // Duplicate partners for seamless infinite loop
+  
   const duplicatedPartners = [...partners, ...partners, ...partners];
 
   return (

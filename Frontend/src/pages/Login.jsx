@@ -14,7 +14,7 @@ export default function Login() {
 
   const navigate = useNavigate();
 
-  // Pre-fill remembered email if exists
+  
   useEffect(() => {
     const rememberedEmail = localStorage.getItem("rememberedEmail");
     if (rememberedEmail) setEmail(rememberedEmail);
@@ -28,22 +28,22 @@ export default function Login() {
     try {
       const response = await authAPI.login({ email, password });
       
-      // Save token and user info
+      // Save token 
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
 
-      // Remember email if checkbox is checked
+     
       if (rememberPassword) {
         localStorage.setItem("rememberedEmail", email);
       } else {
         localStorage.removeItem("rememberedEmail");
       }
 
-      // Redirect based on admin or user
+     
       if (response.data.user.isAdmin) {
         navigate("/admin/dashboard");
       } else {
-        navigate("/"); // homepage or dashboard for normal user
+        navigate("/"); 
       }
 
       console.log("Login successful:", response.data);

@@ -9,7 +9,7 @@ export default function BlogHero() {
                 style={{ backgroundImage: "url('/images/Blog.jpg')" }}
             ></div>
 
-            {/* Dark overlay for better readability */}
+            {/* Dark overlay  */}
             <div className="absolute inset-0 bg-black/40 backdrop-blur-[1px]"></div>
 
             {/* Content */}

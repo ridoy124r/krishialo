@@ -17,3 +17,12 @@ export const me = async (req, res, next) => {
     next(err);
   }
 };
+
+export const listUsers = async (req, res, next) => {
+  try {
+    const users = await userService.listAllUsers();
+    res.json(users);
+  } catch (err) {
+    next(err);
+  }
+};

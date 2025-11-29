@@ -19,3 +19,15 @@ export const createAdmin = async ({ fullName, email, password }) => {
   });
   return user;
 };
+
+export const listAllUsers = async () => {
+  return await prisma.user.findMany({
+    include: {
+      bookings: {
+        include: { service: true },
+        orderBy: { createdAt: 'desc' }
+      }
+    },
+    orderBy: { createdAt: 'desc' }
+  });
+};

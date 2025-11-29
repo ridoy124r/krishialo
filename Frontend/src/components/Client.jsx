@@ -12,11 +12,11 @@ const StatsSection = () => {
     >
       <div className="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6 items-center ">
         
-        {/* 1. Left Box (Client Info) */}
+        {/* 1. Left Box */}
       
         <div className="md:col-span-1 lg:col-span-2 bg-white border-2 border-green-900 rounded-lg flex flex-col items-center justify-center gap-2 px-4 py-4 md:py-6 text-center shadow-lg">
           <div className="flex -space-x-3 mb-2 justify-center">
-            {/* Avatars */}
+           
             <img
               src="https://randomuser.me/api/portraits/men/32.jpg"
               alt="avatar1"
@@ -32,7 +32,7 @@ const StatsSection = () => {
               alt="avatar3"
               className="w-10 h-10 rounded-full border-2 border-white object-cover"
             />
-            {/* Plus Button */}
+          
             <button className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center border-2 border-white text-xl font-bold">
               +
             </button>
@@ -60,7 +60,7 @@ const StatsSection = () => {
        
           <div className="grid grid-cols-2  md:grid-cols-1 lg:grid-cols-3 gap-4">
             
-            {/* Box 1 (Happy Clients) -  */}
+            
             <div className="  bg-white border-2 border-green-900 rounded-lg p-4 text-center w-full shadow-md">
               <div className="text-green-900 mb-2">
                 <svg
@@ -104,7 +104,7 @@ const StatsSection = () => {
               <p className="text-green-900 text-sm mt-1">Projects Completed</p>
             </div>
 
-            {/* Box 3 (IoT Products Sold) */}
+            {/* Box 3   */}
          
             <div className="bg-white border-2 border-green-900 rounded-lg p-4 text-center w-full col-span-2 lg:col-span-1 md:col-span-1 sm:col-span-1 shadow-md">
               <div className="text-green-900 mb-2">
