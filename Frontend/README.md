@@ -1,16 +1,40 @@
-# React + Vite
+# KrishiAlo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A small full-stack project with a Node.js + Express + Prisma backend and a React + Vite frontend.
 
-Currently, two official plugins are available:
+## Structure
+- `Backend/` — Express API, Prisma migrations, and seed scripts.
+- `Frontend/` — React app built with Vite.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Quick Start
 
-## React Compiler
+Prerequisites: Node.js, npm, and a Postgres (or compatible) database.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Backend
+```
+cd Backend
+npm install
+# create a `.env` with at least `DATABASE_URL` and any API keys (e.g. Stripe)
+# run migrations and seed (if needed):
+# npx prisma migrate dev
+# node prisma/seed.js
+node server.js
+```
 
-## Expanding the ESLint configuration
+Frontend
+```
+cd Frontend
+npm install
+npm run dev
+# open the app at the Vite dev URL (usually http://localhost:5173)
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Notes
+- API routes are in `Backend/routes/` and controllers in `Backend/controllers/`.
+- Database schema and seeds live in `Backend/prisma/`.
+
+## Contributing
+Feel free to open issues or pull requests. For major changes, please open an issue first to discuss.
+
+## License
+MIT
