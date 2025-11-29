@@ -6,7 +6,7 @@ import api from '../api/api';
 export default function PaymentSuccess() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [status, setStatus] = useState('verifying'); // verifying | success | failed
+  const [status, setStatus] = useState('verifying'); 
   const [message, setMessage] = useState('');
 
   useEffect(() => {

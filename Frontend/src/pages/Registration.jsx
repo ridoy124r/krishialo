@@ -1,5 +1,5 @@
 // pages/Registration.jsx
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   TrendingUp,
   Leaf,
@@ -12,7 +12,7 @@ import {
   Camera,
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import { authAPI } from "../api/apiServices";
+import { AuthContext } from "../context/AuthContext.jsx";
 
 function LeftPanel() {
   return (
@@ -80,10 +80,12 @@ function UserRegistration() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [profileImage, setProfileImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
+  const { api } = useContext(AuthContext);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -92,7 +94,23 @@ function UserRegistration() {
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    if (file) setProfileImage(file);
+    if (file) {
+      // Validate file size (5MB max)
+      if (file.size > 5 * 1024 * 1024) {
+        setError("Image size must be less than 5MB");
+        return;
+      }
+      
+  
+      if (!file.type.startsWith('image/')) {
+        setError("Please upload a valid image file");
+        return;
+      }
+      
+      setProfileImage(file);
+      setImagePreview(URL.createObjectURL(file));
+      setError("");
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -117,22 +135,31 @@ function UserRegistration() {
     setLoading(true);
 
     try {
-      const registrationData = {
-        fullName: formData.fullName,
-        email: formData.email,
-        phone: formData.phone,
-        password: formData.password,
-        location: formData.location,
-      };
+      
+      const registrationData = new FormData();
+      registrationData.append("fullName", formData.fullName);
+      registrationData.append("email", formData.email);
+      registrationData.append("phone", formData.phone);
+      registrationData.append("password", formData.password);
+      registrationData.append("location", formData.location);
+      
+      
+      if (profileImage) {
+        registrationData.append("profileImage", profileImage);
+      }
 
-
-      const response = await authAPI.register(registrationData);
+     
+      const response = await api.post("/auth/register", registrationData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       console.log("Registration successful:", response.data);
       alert("Account created successfully! Please login.");
       navigate("/login");
     } catch (err) {
-      setError(err.response?.data?.message || "Registration failed. Please try again.");
+      setError(err.message || "Registration failed. Please try again.");
       console.error("Registration error:", err);
     } finally {
       setLoading(false);
@@ -152,17 +179,20 @@ function UserRegistration() {
 
         {/* Profile Image */}
         <div className="flex flex-col items-center mb-4">
-          <label htmlFor="profile-upload" className="cursor-pointer">
-            <div className="w-24 h-24 bg-green-600 rounded-full flex items-center justify-center hover:bg-green-700 transition-colors">
-              {profileImage ? (
+          <label htmlFor="profile-upload" className="cursor-pointer group">
+            <div className="w-24 h-24 bg-green-600 rounded-full flex items-center justify-center hover:bg-green-700 transition-colors relative overflow-hidden">
+              {imagePreview ? (
                 <img
-                  src={URL.createObjectURL(profileImage)}
-                  alt="Profile"
-                  className="w-full h-full rounded-full object-cover"
+                  src={imagePreview}
+                  alt="Profile Preview"
+                  className="w-full h-full object-cover"
                 />
               ) : (
                 <Camera className="w-10 h-10 text-white" />
               )}
+              <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                <Camera className="w-8 h-8 text-white" />
+              </div>
             </div>
           </label>
           <input
@@ -172,7 +202,9 @@ function UserRegistration() {
             onChange={handleImageChange}
             className="hidden"
           />
-          <p className="mt-2 text-gray-700 font-medium text-sm">Add Photo</p>
+          <p className="mt-2 text-gray-700 font-medium text-sm">
+            {imagePreview ? "Change Photo" : "Add Photo"}
+          </p>
         </div>
 
         <form onSubmit={handleSubmit}>
