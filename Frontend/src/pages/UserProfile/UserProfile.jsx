@@ -3,10 +3,11 @@ import React, { useState, useEffect, useContext } from "react";
 import { Camera, Mail, Phone, MapPin, User, Edit2, Save, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext.jsx";
+import api from "../../api/api.js";
 
 export default function UserProfile() {
   const navigate = useNavigate();
-  const { user, api } = useContext(AuthContext);
+  const { user, updateUser } = useContext(AuthContext);
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -92,23 +93,18 @@ export default function UserProfile() {
         formDataToSend.append("profileImage", profileImage);
       }
 
-      // Use api from AuthContext
-      const response = await api.put("/users/profile", formDataToSend, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      // Send multipart form to backend
+      await api.put("/users/profile", formDataToSend);
 
-      // Refresh user data after update
-      const updatedUser = await api.get("/users/me");
-      // User will be updated in context automatically on next render
-      
+      // Fetch fresh user and update context/UI
+      const res = await api.get("/users/me");
+      if (res && res.data) {
+        updateUser(res.data);
+        setImagePreview(res.data.profileImage || "");
+      }
+
       setIsEditing(false);
       setSuccess("Profile updated successfully!");
-      
-      // Reload page to refresh context
-      window.location.reload();
-
       setTimeout(() => setSuccess(""), 3000);
     } catch (err) {
       setError(err.message || "Failed to update profile");
@@ -131,7 +127,7 @@ export default function UserProfile() {
         {/* Header */}
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
           {/* Cover Image */}
-          <div className="h-32 bg-gradient-to-r from-green-600 to-green-800"></div>
+          <div className="h-32 bg-linear-to-r from-green-600 to-green-800"></div>
 
           {/* Profile Section */}
           <div className="relative px-6 pb-6">
