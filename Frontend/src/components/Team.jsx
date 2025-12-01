@@ -8,17 +8,17 @@ export default function LeadingTeam() {
     {
       name: "Sahin Alam",
       role: "UI/UX Designer",
-      image: "/public/images/sahin.png"
+      image: "./public/images/sahin.png"
     },
     {
       name: "Shamim Ahmmed",
       role: "Full Stack Developer",
-      image: "/public/images/shamim.png"
+      image: "./public/images/shamim.png"
     },
     {
       name: "Sheikh Ridoy",
       role: "Full Stack Developer",
-      image: "/public/images/ridoy.jpg"
+      image: "./public/images/ridoy.jpg"
     }
   ];
  
