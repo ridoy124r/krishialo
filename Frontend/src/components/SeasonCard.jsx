@@ -25,7 +25,7 @@ const SeasonCard = () => {
       
       <div className="h-56 w-full overflow-hidden">
         <img
-          src="./public/images/Seasion.png"
+          src="/images/Seasion.png"
           alt="Farmer"
           className="w-full h-full object-cover"
         />
