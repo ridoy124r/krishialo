@@ -18,7 +18,7 @@ export default function LeadingTeam() {
     {
       name: "Sheikh Ridoy",
       role: "Full Stack Developer",
-      image: "./public/images/ridoy.jpg"
+      image: "./public/images/LinkedIn.jpg"
     }
   ];
  
