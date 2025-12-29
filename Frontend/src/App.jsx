@@ -76,9 +76,9 @@ function AnimatedRoutes() {
         <Route path="/admin" element={<ProtectedRoute adminOnly={true}><AdminLayout /></ProtectedRoute>}>
           <Route index element={<PageWrapper pt><AdminDashboard /></PageWrapper>} />
           <Route path="dashboard" element={<PageWrapper pt><AdminDashboard /></PageWrapper>} />
-          <Route path="users" element={<AdminUsers />} />
-          <Route path="services" element={<AdminServices />} />
-          <Route path="bookings" element={<AdminBookings />} />
+          <Route path="users" element={<PageWrapper pt><AdminUsers /></PageWrapper>} />
+          <Route path="services" element={<PageWrapper pt><AdminServices /></PageWrapper>} />
+          <Route path="bookings" element={<PageWrapper pt><AdminBookings /></PageWrapper>} />
         </Route>
         
         {/* 404 Not Found Route */}

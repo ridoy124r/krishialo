@@ -31,3 +31,34 @@ export const listAllUsers = async () => {
     orderBy: { createdAt: 'desc' }
   });
 };
+
+export const updateUserProfile = async (userId, { fullName, email, phone, location }) => {
+  const existing = await prisma.user.findUnique({ where: { id: userId } });
+  if (!existing) {
+    const e = new Error('User not found');
+    e.status = 404;
+    throw e;
+  }
+
+  // Check if email is being changed and if new email is already in use
+  if (email !== existing.email) {
+    const emailExists = await prisma.user.findUnique({ where: { email } });
+    if (emailExists) {
+      const e = new Error('Email already in use');
+      e.status = 400;
+      throw e;
+    }
+  }
+
+  const updatedUser = await prisma.user.update({
+    where: { id: userId },
+    data: {
+      fullName,
+      email,
+      phone,
+      location
+    }
+  });
+
+  return updatedUser;
+};

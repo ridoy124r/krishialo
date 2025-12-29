@@ -12,7 +12,7 @@ import {
   Camera,
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import api from "../api/api"; // <-- use your api instance
+import api from "../api/api"; 
 
 function LeftPanel() {
   return (
@@ -144,13 +144,13 @@ function UserRegistration() {
         registrationData.append("profileImage", profileImage);
       }
 
-      // Debug logs to help if something is undefined at runtime
+    
       console.log("Debug: api import ->", api);
       console.log("Has api.post?:", !!(api && typeof api.post === "function"));
 
-      // Preferred: use axios instance from src/api/api.js
+    
       if (api && typeof api.post === "function") {
-        // For multipart/form-data, axios can handle boundary automatically.
+      
         const resp = await api.post("/auth/register", registrationData, {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -162,12 +162,12 @@ function UserRegistration() {
         return;
       }
 
-      // Fallback: direct fetch (use full URL)
+      
       console.warn("api.post not available — falling back to fetch");
       const base = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
       const res = await fetch(`${base}/auth/register`, {
         method: "POST",
-        body: registrationData, // FormData is fine with fetch
+        body: registrationData, 
       });
       if (!res.ok) {
         const text = await res.text();
@@ -179,7 +179,7 @@ function UserRegistration() {
       navigate("/login");
     } catch (err) {
       console.error("Registration error:", err);
-      // prefer server error message if available
+     
       const serverMessage = err?.response?.data?.message || err?.message;
       setError(serverMessage || "Registration failed. Please try again.");
     } finally {

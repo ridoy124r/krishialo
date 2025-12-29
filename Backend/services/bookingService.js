@@ -91,6 +91,19 @@ export const createBooking = async (userId, data) => {
     // If we have a known fallback entry for this service id, upsert it.
     const fallback = FALLBACK_SERVICES[serviceId];
     if (fallback) {
+      // Ensure the category exists before creating the service
+      if (fallback.categoryId) {
+        await prisma.serviceCategory.upsert({
+          where: { id: fallback.categoryId },
+          update: {},
+          create: {
+            id: fallback.categoryId,
+            name: fallback.categoryId.replace('cat-', '').charAt(0).toUpperCase() + fallback.categoryId.replace('cat-', '').slice(1),
+            slug: fallback.categoryId.replace('cat-', ''),
+          },
+        });
+      }
+      
       service = await prisma.service.upsert({
         where: { id: fallback.id },
         update: fallback,

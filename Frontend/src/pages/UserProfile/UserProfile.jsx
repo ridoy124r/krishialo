@@ -3,10 +3,11 @@ import React, { useState, useEffect, useContext } from "react";
 import { Camera, Mail, Phone, MapPin, User, Edit2, Save, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext.jsx";
+import api from "../../api/api.js";
 
 export default function UserProfile() {
   const navigate = useNavigate();
-  const { user, api } = useContext(AuthContext);
+  const { user, updateUser } = useContext(AuthContext);
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -82,36 +83,41 @@ export default function UserProfile() {
     setLoading(true);
 
     try {
-      const formDataToSend = new FormData();
-      formDataToSend.append("fullName", formData.fullName);
-      formDataToSend.append("email", formData.email);
-      formDataToSend.append("phone", formData.phone);
-      formDataToSend.append("location", formData.location);
-
-      if (profileImage) {
-        formDataToSend.append("profileImage", profileImage);
+      // Validate required fields
+      if (!formData.fullName.trim() || !formData.email.trim() || !formData.phone.trim() || !formData.location.trim()) {
+        setError("All fields are required");
+        setLoading(false);
+        return;
       }
 
-      // Use api from AuthContext
-      const response = await api.put("/users/profile", formDataToSend, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const dataToSend = {
+        fullName: formData.fullName,
+        email: formData.email,
+        phone: formData.phone,
+        location: formData.location
+      };
 
-      // Refresh user data after update
-      const updatedUser = await api.get("/users/me");
-      // User will be updated in context automatically on next render
+      console.log("Submitting profile update with:", dataToSend);
+
+      // Use api instance to update user profile (JSON format)
+      const response = await api.put("/users/profile", dataToSend);
+
+      console.log("Profile update response:", response.data);
+
+      // Update context with new user data
+      if (response.data.user) {
+        updateUser(response.data.user);
+      }
       
       setIsEditing(false);
       setSuccess("Profile updated successfully!");
       
-      // Reload page to refresh context
-      window.location.reload();
-
       setTimeout(() => setSuccess(""), 3000);
     } catch (err) {
-      setError(err.message || "Failed to update profile");
+      console.error("Profile update error:", err);
+      console.error("Error response:", err.response?.data);
+      console.error("Error status:", err.response?.status);
+      setError(err.response?.data?.message || err.message || "Failed to update profile");
     } finally {
       setLoading(false);
     }

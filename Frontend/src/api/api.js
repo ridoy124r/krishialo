@@ -30,10 +30,18 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      // Token expired or invalid
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      window.location.href = '/login';
+      // Only logout if it's not during payment verification
+      const isPaymentVerification = error.config?.url?.includes('/verify-payment');
+      
+      if (!isPaymentVerification) {
+        // Token expired or invalid - clear auth and redirect to login
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        window.location.href = '/login';
+      } else {
+        // For payment verification, just reject without logging out
+        console.warn('Payment verification encountered auth issue, but preserving session');
+      }
     }
     return Promise.reject(error);
   }
